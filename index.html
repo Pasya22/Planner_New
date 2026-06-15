@@ -1,1148 +1,1189 @@
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0
-  }
-
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #F8FAFC;
-    color: #1E293B;
-    font-size: 12px;
-    line-height: 1.4
-  }
-
-  :root {
-    --or: #F97316;
-    --ord: #C2410C;
-    --nv: #1E293B;
-    --nv2: #1E3A5F;
-    --tl: #0E7490;
-    --gn: #166534;
-    --pu: #7C3AED;
-    --rd: #DC2626;
-    --bd: #E2E8F0;
-    --alt: #F1F5F9;
-    --wh: #fff;
-    --ab: #FEF3C7;
-    --ib: #1D4ED8
-  }
-
-  .hdr {
-    background: #1E293B;
-    color: #fff;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 3px solid var(--or)
-  }
-
-  .hdr h1 {
-    font-size: 14px;
-    font-weight: 700;
-    flex: 1
-  }
-
-  .hd-sub {
-    font-size: 10px;
-    color: #94A3B8
-  }
-
-  .badge {
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 10px;
-    font-weight: 700;
-    color: #fff
-  }
-
-  .bg-or {
-    background: var(--or)
-  }
-
-  .bg-tl {
-    background: var(--tl)
-  }
-
-  .bg-gn {
-    background: var(--gn)
-  }
-
-  .bg-pu {
-    background: var(--pu)
-  }
-
-  .tabs {
-    display: flex;
-    background: #fff;
-    border-bottom: 2px solid var(--bd);
-    overflow-x: auto
-  }
-
-  .tab {
-    padding: 8px 14px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 700;
-    color: #64748B;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    white-space: nowrap
-  }
-
-  .tab.on {
-    color: var(--or);
-    border-bottom-color: var(--or)
-  }
-
-  .tab:hover:not(.on) {
-    background: var(--alt)
-  }
-
-  .pnl {
-    display: none;
-    padding: 12px 14px
-  }
-
-  .pnl.on {
-    display: block
-  }
-
-  .sbar {
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    gap: 6px
-  }
-
-  .bg-nv {
-    background: var(--nv2)
-  }
-
-  .bg-gn2 {
-    background: var(--gn)
-  }
-
-  .bg-pu2 {
-    background: var(--pu)
-  }
-
-  .btn {
-    padding: 4px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    transition: all .12s;
-    white-space: nowrap
-  }
-
-  .b-add {
-    background: #fff;
-    color: var(--or);
-    border: 1.5px solid var(--or)
-  }
-
-  .b-add:hover {
-    background: var(--or);
-    color: #fff
-  }
-
-  .b-sv {
-    background: var(--gn);
-    color: #fff
-  }
-
-  .b-sv:hover {
-    background: #15803D
-  }
-
-  .b-cc {
-    background: var(--alt);
-    color: var(--nv);
-    border: 1px solid var(--bd)
-  }
-
-  .b-sync {
-    background: var(--tl);
-    color: #fff
-  }
-
-  .b-sync:hover {
-    background: #0C6177
-  }
-
-  .b-reset {
-    background: #FEE2E2;
-    color: var(--rd);
-    border: 1px solid #FCA5A5;
-    font-size: 10px
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 12px;
-    font-size: 11px;
-    table-layout: fixed
-  }
-
-  th {
-    padding: 6px 8px;
-    text-align: left;
-    font-size: 10px;
-    font-weight: 700;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden
-  }
-
-  .th-tl {
-    background: var(--tl)
-  }
-
-  .th-gn {
-    background: var(--gn)
-  }
-
-  .th-pu {
-    background: var(--pu)
-  }
-
-  .th-or {
-    background: var(--or)
-  }
-
-  td {
-    padding: 5px 7px;
-    border-bottom: 1px solid var(--bd);
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap
-  }
-
-  tr:nth-child(even) td {
-    background: var(--alt)
-  }
-
-  tr:hover td {
-    background: #E0F2FE
-  }
-
-  tr.drag-over td {
-    background: #FEF3C7 !important;
-    border-top: 2px solid var(--or)
-  }
-
-  .tr-tot td {
-    background: var(--ord) !important;
-    color: #fff;
-    font-weight: 700
-  }
-
-  .tr-gnd td {
-    background: var(--or) !important;
-    color: #fff;
-    font-weight: 700;
-    font-size: 12px
-  }
-
-  .mn {
-    text-align: right;
-    font-weight: 700
-  }
-
-  .iab {
-    background: var(--ab);
-    color: var(--ib);
-    font-weight: 700
-  }
-
-  .ce {
-    background: #FEF3C7;
-    color: #92400E;
-    border: 1px solid #F59E0B;
-    padding: 2px 6px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: 700
-  }
-
-  .cd {
-    background: #FEE2E2;
-    color: var(--rd);
-    border: 1px solid #FCA5A5;
-    padding: 2px 6px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: 700
-  }
-
-  .ce:hover {
-    background: #F59E0B;
-    color: #fff
-  }
-
-  .cd:hover {
-    background: var(--rd);
-    color: #fff
-  }
-
-  .drag-handle {
-    cursor: grab;
-    color: #94A3B8;
-    padding: 0 4px;
-    font-size: 14px;
-    user-select: none
-  }
-
-  .drag-handle:active {
-    cursor: grabbing
-  }
-
-  .dragging td {
-    opacity: .4;
-    background: #EDE9FE !important
-  }
-
-  .mbg {
-    display: none;
-    min-height: 500px;
-    background: rgba(0, 0, 0, .45);
-    align-items: flex-start;
-    justify-content: center;
-    padding: 20px 0
-  }
-
-  .mbg.open {
-    display: flex
-  }
-
-  .modal {
-    background: #fff;
-    border-radius: 10px;
-    padding: 18px 20px;
-    width: 480px;
-    max-width: 96vw;
-    max-height: 80vh;
-    overflow-y: auto
-  }
-
-  .modal h3 {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    border-bottom: 2px solid var(--or);
-    padding-bottom: 6px
-  }
-
-  .fg {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px
-  }
-
-  .fg1 {
-    grid-template-columns: 1fr
-  }
-
-  .fld {
-    display: flex;
-    flex-direction: column;
-    gap: 3px
-  }
-
-  .fld label {
-    font-size: 10px;
-    font-weight: 700;
-    color: #64748B
-  }
-
-  .fld input,
-  .fld select {
-    padding: 5px 8px;
-    border: 1.5px solid var(--bd);
-    border-radius: 4px;
-    font-size: 11px;
-    outline: none
-  }
-
-  .fld input:focus,
-  .fld select:focus {
-    border-color: var(--or)
-  }
-
-  .fhi input,
-  .fhi select {
-    background: var(--ab);
-    color: var(--ib);
-    font-weight: 700;
-    border-color: #F59E0B
-  }
-
-  .mact {
-    display: flex;
-    gap: 6px;
-    justify-content: flex-end;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--bd)
-  }
-
-  .ac {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    flex-wrap: wrap
-  }
-
-  .acard {
-    background: #fff;
-    border: 1.5px solid var(--bd);
-    border-radius: 7px;
-    padding: 10px 12px;
-    flex: 1;
-    min-width: 110px;
-    text-align: center
-  }
-
-  .al {
-    font-size: 10px;
-    color: #64748B;
-    font-weight: 700;
-    margin-bottom: 3px
-  }
-
-  .av {
-    font-size: 14px;
-    font-weight: 700
-  }
-
-  .pr {
-    display: grid;
-    grid-template-columns: 180px 140px 1fr;
-    gap: 8px;
-    align-items: center;
-    padding: 6px 10px;
-    background: var(--alt);
-    border-radius: 5px;
-    margin-bottom: 4px
-  }
-
-  .pr label {
-    font-size: 11px;
-    font-weight: 700
-  }
-
-  .pr input {
-    padding: 5px 8px;
-    border: 1.5px solid var(--bd);
-    border-radius: 4px;
-    font-size: 11px;
-    background: var(--ab);
-    color: var(--ib);
-    font-weight: 700;
-    outline: none;
-    width: 100%
-  }
-
-  .pr .ht {
-    font-size: 10px;
-    color: #64748B;
-    font-style: italic
-  }
-
-  .bok {
-    background: #DCFCE7;
-    color: #166534;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-size: 9px;
-    font-weight: 700
-  }
-
-  .best {
-    background: #FEF3C7;
-    color: #92400E;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-size: 9px;
-    font-weight: 700
-  }
-
-  .sg {
-    margin-bottom: 16px
-  }
-
-  .ib {
-    background: #EFF6FF;
-    border-left: 3px solid var(--tl);
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 10px;
-    color: #1E3A5F;
-    margin-bottom: 10px
-  }
-
-  .ss {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 12px;
-    border-radius: 6px;
-    font-size: 11px;
-    margin-bottom: 8px;
-    font-weight: 600
-  }
-
-  .ss.ok {
-    background: #DCFCE7;
-    color: #166534
-  }
-
-  .ss.er {
-    background: #FEE2E2;
-    color: #991B1B
-  }
-
-  .ss.ld {
-    background: #EFF6FF;
-    color: #1E3A5F
-  }
-
-  .day-hdr {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--or);
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    margin-bottom: 8px
-  }
-
-  .day-hdr .d-title {
-    font-size: 11px;
-    font-weight: 700;
-    flex: 1
-  }
-
-  .day-hdr input[type=time] {
-    padding: 3px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, .4);
-    background: rgba(255, 255, 255, .15);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700
-  }
-
-  .day-hdr input[type=text] {
-    padding: 3px 6px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, .4);
-    background: rgba(255, 255, 255, .15);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    width: 120px
-  }
-
-  .del-day {
-    background: rgba(220, 38, 38, .2);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, .3);
-    padding: 2px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: 700
-  }
-
-  .del-day:hover {
-    background: rgba(220, 38, 38, .5)
-  }
-</style>
-
-<div class="hdr">
-  <span style="font-size:18px">🗺️</span>
-  <div style="flex:1">
-    <h1>Travel Planner Pro — Bandung Weekend Escape</h1>
-    <div class="hd-sub">Full CRUD · Drag & Drop · Multi-hari · Google Sheets Sync</div>
-  </div>
-  <span class="badge bg-or">CRUD</span>
-  <span class="badge bg-tl">DRAG</span>
-  <span class="badge bg-gn">SHEETS</span>
-</div>
-
-<div class="tabs">
-  <div class="tab on" onclick="sw('master')">📋 Master Data</div>
-  <div class="tab" onclick="sw('itin')">🗺️ Itinerary</div>
-  <div class="tab" onclick="sw('budget')">💰 Budget</div>
-  <div class="tab" onclick="sw('adj')">⚙️ Adjustment</div>
-  <div class="tab" onclick="sw('sync')">☁️ Sheets Sync</div>
-</div>
-
-<div id="p-master" class="pnl on"></div>
-<div id="p-itin" class="pnl"></div>
-<div id="p-budget" class="pnl"></div>
-<div id="p-adj" class="pnl"></div>
-<div id="p-sync" class="pnl"></div>
-
-<div class="mbg" id="mbg">
-  <div class="modal">
-    <h3 id="mt">Form</h3>
-    <div id="mb"></div>
-    <div class="mact"><button class="btn b-cc" onclick="cm()">Batal</button><button class="btn b-sv"
-        onclick="sm()">Simpan</button></div>
-  </div>
-</div>
-
-<script>
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzwBqHsm10ZufbBMHzNOqUreo8jpfCBjK28ZWQ9Pqsl3_nFeQAx3Ns0TNU1Z4maLQIP/exec';
-
-  const DEF = {
-    trains: [
-      { id: 1, name: "Sri Tanjung (Ekonomi)", route: "Wonokromo → Lempuyangan", depDate: "2026-07-01", depTime: "14:39", arrDate: "2026-07-01", arrTime: "19:33", price: 150000, pax: 2, status: "estimasi" },
-      { id: 2, name: "Lodaya (Eksekutif)", route: "Yogyakarta → Bandung", depDate: "2026-07-02", depTime: "20:01", arrDate: "2026-07-03", arrTime: "03:14", price: 220000, pax: 2, status: "estimasi" },
-      { id: 3, name: "Malabar (Eksekutif)", route: "Bandung → Malang", depDate: "2026-07-05", depTime: "18:10", arrDate: "2026-07-06", arrTime: "06:52", price: 180000, pax: 2, status: "estimasi" },
-    ],
-    hotels: [
-      { id: 1, name: "Penginapan Yogyakarta (Transit)", city: "Yogyakarta", checkIn: "2026-07-01", checkOut: "2026-07-02", pricePerNight: 89000, status: "konfirmasi" },
-      { id: 2, name: "Dreamstay Bandung", city: "Bandung", checkIn: "2026-07-03", checkOut: "2026-07-05", pricePerNight: 0, status: "estimasi" },
-    ],
-    params: { faktor: 1.0, speed: 30, consumption: 35, fuelPrice: 10000 },
-    days: [
-      {
-        id: 1, label: "Jumat, 03 Jul 2026", startTime: "06:00", activities: [
-          { id: 1, act: "Sarapan Bubur Kang Dedi", loc: "Jl. Sudirman", base: 15, dur: 40 },
-          { id: 2, act: "Beli Pukis Lumer", loc: "Leuwi Panjang", base: 20, dur: 15 },
-          { id: 3, act: "Titip Koper", loc: "Dreamstay", base: 15, dur: 10 },
-          { id: 4, act: "Ke Al Jabbar", loc: "Bandung Timur", base: 25, dur: 45 },
-          { id: 5, act: "Main Sepeda & Sunset", loc: "Summarecon Bandung", base: 15, dur: 105 },
-          { id: 6, act: "Makan Malam", loc: "Summarecon", base: 0, dur: 45 },
-          { id: 7, act: "Kembali ke Dreamstay", loc: "Dreamstay", base: 25, dur: 0 },
-        ]
-      },
-      {
-        id: 2, label: "Sabtu, 04 Jul 2026", startTime: "03:00", activities: [
-          { id: 1, act: "Bangun & Beli Bekal", loc: "Dreamstay / Indomaret", base: 5, dur: 15 },
-          { id: 2, act: "Berangkat ke Cukul", loc: "Pangalengan", base: 90, dur: 0 },
-          { id: 3, act: "Sunrise Point", loc: "Sunrise Point Cukul", base: 0, dur: 120 },
-          { id: 4, act: "Sarapan", loc: "Cukul", base: 0, dur: 90 },
-          { id: 5, act: "Picnic & Grill Lembang", loc: "Kebon Pinus Lembang", base: 120, dur: 300 },
-          { id: 6, act: "Makan Malam & Istirahat", loc: "Dreamstay", base: 60, dur: 60 },
-        ]
-      },
-      {
-        id: 3, label: "Minggu, 05 Jul 2026", startTime: "07:00", activities: [
-          { id: 1, act: "Sarapan & Beli Tiramisusu", loc: "Bandung / Chocomory", base: 30, dur: 60 },
-          { id: 2, act: "Ke Rumah Aspol", loc: "Bandung", base: 20, dur: 160 },
-          { id: 3, act: "Check-out & Kembalikan Motor", loc: "Dreamstay → Stasiun", base: 20, dur: 40 },
-          { id: 4, act: "Tunggu Kereta Malabar", loc: "Stasiun Bandung", base: 0, dur: 0 },
-        ]
-      },
-    ],
-    budgetDays: [
-      { dayId: 1, items: [{ id: 1, cat: "Sarapan Bubur", amount: 30000 }, { id: 2, cat: "Pukis Lumer", amount: 40000 }, { id: 3, cat: "Makan Siang", amount: 50000 }, { id: 4, cat: "Makan Malam", amount: 75000 }, { id: 5, cat: "Parkir", amount: 10000 }, { id: 6, cat: "Cadangan", amount: 50000 }] },
-      { dayId: 2, items: [{ id: 1, cat: "Bekal Sunrise", amount: 25000 }, { id: 2, cat: "Sarapan Cukul", amount: 40000 }, { id: 3, cat: "Grill Lembang", amount: 150000 }, { id: 4, cat: "Makan Malam", amount: 75000 }, { id: 5, cat: "Parkir", amount: 15000 }, { id: 6, cat: "Cadangan", amount: 50000 }] },
-      { dayId: 3, items: [{ id: 1, cat: "Sarapan", amount: 40000 }, { id: 2, cat: "Tiramisusu Chocomory", amount: 120000 }, { id: 3, cat: "Makan Siang", amount: 60000 }, { id: 4, cat: "Parkir", amount: 10000 }, { id: 5, cat: "Cadangan", amount: 50000 }] },
-    ],
-    budgetAwal: 2500000,
-  };
-
-  let S = JSON.parse(JSON.stringify(DEF));
-  let NI = { tr: 10, ht: 10, day: 10, act: 100, bu: 100 };
-  let MCX = {};
-  let dragSrc = null, dragDayId = null;
-  let syncStatus = '';
-
-  async function loadLocal() {
-    try {
-      const r = await window.storage.get('tpv3');
-      if (r && r.value) S = JSON.parse(r.value);
-      const n = await window.storage.get('tpni3');
-      if (n && n.value) NI = JSON.parse(n.value);
-    } catch (e) { }
-  }
-  async function saveLocal() {
-    try {
-      await window.storage.set('tpv3', JSON.stringify(S));
-      await window.storage.set('tpni3', JSON.stringify(NI));
-    } catch (e) { }
-  }
-
-  const rp = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
-  const dur = (dd, dt, ad, at) => {
-    const d = (new Date(ad + 'T' + at)) - (new Date(dd + 'T' + dt));
-    if (d < 0) return '-';
-    const m = d / 60000; return Math.floor(m / 60) + 'j ' + Math.round(m % 60) + 'm';
-  };
-  const nights = (ci, co) => Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
-  const fmtD = d => { if (!d) return '-'; const [y, m, dd] = d.split('-'); const mn = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des']; return dd + ' ' + mn[parseInt(m) - 1] + ' ' + y; };
-  const t2m = t => { if (!t) return 0; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
-  const m2t = m => { const h = Math.floor(m / 60) % 24, mm = m % 60; return String(h).padStart(2, '0') + ':' + String(mm).padStart(2, '0'); };
-  const aMin = b => Math.round(b * (S.params.faktor || 1));
-  const bbm = day => {
-    const bd = S.budgetDays.find(x => x.dayId === day.id);
-    const d = S.days.find(x => x.id === day.id);
-    if (!d) return 0;
-    const tot = d.activities.reduce((a, x) => a + aMin(x.base), 0);
-    return Math.round(tot / 60 * S.params.speed / S.params.consumption * S.params.fuelPrice);
-  };
-
-  function sw(name) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
-    document.querySelectorAll('.pnl').forEach(p => p.classList.remove('on'));
-    const idx = ['master', 'itin', 'budget', 'adj', 'sync'].indexOf(name);
-    document.querySelectorAll('.tab')[idx].classList.add('on');
-    document.getElementById('p-' + name).classList.add('on');
-    render();
-  }
-
-  function render() { rMaster(); rItin(); rBudget(); rAdj(); rSync(); }
-
-  function rMaster() {
-    const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
-    const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
-    let h = `<div class="ib">💡 Drag ☰ untuk reorder baris. Klik <b>Edit/Hapus</b> untuk CRUD. Data sync ke Google Sheets via tab ☁️ Sheets Sync.</div>`;
-
-    h += `<div class="sg"><div class="sbar bg-nv">🚆 Tiket kereta <div style="display:flex;gap:6px"><button class="btn b-add" onclick="om('train','add')">+ Tambah tiket</button></div></div>`;
-    h += `<div style="overflow-x:auto"><table style="table-layout:auto"><thead><tr>
-    <th class="th-tl" style="width:24px"></th><th class="th-tl" style="width:20px">#</th>
-    <th class="th-tl" style="width:140px">Nama KA</th><th class="th-tl" style="width:150px">Rute</th>
-    <th class="th-tl" style="width:80px">Tgl Brkt</th><th class="th-tl" style="width:50px">Jam</th>
-    <th class="th-tl" style="width:80px">Tgl Tiba</th><th class="th-tl" style="width:50px">Jam</th>
-    <th class="th-tl" style="width:50px">Durasi</th><th class="th-tl" style="width:90px">Harga/Org</th>
-    <th class="th-tl" style="width:35px">Pax</th><th class="th-tl" style="width:90px">Subtotal</th>
-    <th class="th-tl" style="width:70px">Status</th><th class="th-tl" style="width:90px">Aksi</th>
-  </tr></thead><tbody id="tb-trains">`;
-    S.trains.forEach((t, i) => {
-      h += `<tr draggable="true" data-type="train" data-id="${t.id}" ondragstart="dStart(event,'train','${t.id}')" ondragover="dOver(event)" ondrop="dDrop(event,'train')">
-      <td><span class="drag-handle" title="Drag untuk reorder">☰</span></td><td>${i + 1}</td>
-      <td style="font-weight:700;white-space:nowrap">${t.name}</td><td>${t.route}</td>
-      <td>${fmtD(t.depDate)}</td><td style="font-weight:700">${t.depTime}</td>
-      <td>${fmtD(t.arrDate)}</td><td style="font-weight:700">${t.arrTime}</td>
-      <td>${dur(t.depDate, t.depTime, t.arrDate, t.arrTime)}</td>
-      <td class="mn iab">${rp(t.price)}</td>
-      <td style="text-align:center;font-weight:700;color:var(--ib)">${t.pax}</td>
-      <td class="mn">${rp(t.price * t.pax)}</td>
-      <td><span class="${t.status === 'konfirmasi' ? 'bok' : 'best'}">${t.status}</span></td>
-      <td style="white-space:nowrap"><span class="ce" onclick="om('train','edit',${t.id})">✏️</span> <span class="cd" onclick="di('train',${t.id})">🗑</span></td>
-    </tr>`;
-    });
-    h += `<tr class="tr-tot"><td colspan="11" style="text-align:right">Total tiket</td><td class="mn">${rp(tkt)}</td><td colspan="2"></td></tr></tbody></table></div></div>`;
-
-    h += `<div class="sg"><div class="sbar bg-nv">🏨 Penginapan <button class="btn b-add" onclick="om('hotel','add')">+ Tambah</button></div>`;
-    h += `<div style="overflow-x:auto"><table style="table-layout:auto"><thead><tr>
-    <th class="th-tl" style="width:24px"></th><th class="th-tl" style="width:20px">#</th>
-    <th class="th-tl">Nama</th><th class="th-tl" style="width:80px">Kota</th>
-    <th class="th-tl" style="width:80px">Check-in</th><th class="th-tl" style="width:80px">Check-out</th>
-    <th class="th-tl" style="width:55px">Malam</th><th class="th-tl" style="width:90px">Harga/mlm</th>
-    <th class="th-tl" style="width:90px">Subtotal</th><th class="th-tl" style="width:70px">Status</th>
-    <th class="th-tl" style="width:90px">Aksi</th>
-  </tr></thead><tbody id="tb-hotels">`;
-    S.hotels.forEach((ht, i) => {
-      const n = nights(ht.checkIn, ht.checkOut);
-      h += `<tr draggable="true" data-type="hotel" data-id="${ht.id}" ondragstart="dStart(event,'hotel','${ht.id}')" ondragover="dOver(event)" ondrop="dDrop(event,'hotel')">
-      <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
-      <td style="font-weight:700">${ht.name}</td><td>${ht.city}</td>
-      <td>${fmtD(ht.checkIn)}</td><td>${fmtD(ht.checkOut)}</td>
-      <td style="text-align:center">${n} mlm</td>
-      <td class="mn iab">${rp(ht.pricePerNight)}</td>
-      <td class="mn">${rp(ht.pricePerNight * n)}</td>
-      <td><span class="${ht.status === 'konfirmasi' ? 'bok' : 'best'}">${ht.status}</span></td>
-      <td style="white-space:nowrap"><span class="ce" onclick="om('hotel','edit',${ht.id})">✏️</span> <span class="cd" onclick="di('hotel',${ht.id})">🗑</span></td>
-    </tr>`;
-    });
-    h += `<tr class="tr-tot"><td colspan="8" style="text-align:right">Total penginapan</td><td class="mn">${rp(thn)}</td><td colspan="2"></td></tr>
-  <tr class="tr-gnd"><td colspan="8" style="text-align:right">Grand total tiket + penginapan</td><td class="mn">${rp(tkt + thn)}</td><td colspan="2"></td></tr>
-  </tbody></table></div></div>`;
-
-    const p = S.params;
-    h += `<div class="sg"><div class="sbar bg-nv">⚙️ Parameter motor</div>
-  <div class="pr"><label>⏱ Faktor waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${p.faktor}" onchange="S.params.faktor=parseFloat(this.value);saveLocal();render()"><span class="ht">1.0=Normal · 1.3=Macet · 0.8=Lancar</span></div>
-  <div class="pr"><label>🏎 Kecepatan (km/j)</label><input type="number" step="1" value="${p.speed}" onchange="S.params.speed=parseFloat(this.value);saveLocal();render()"><span class="ht">Rata-rata motor di Bandung</span></div>
-  <div class="pr"><label>⛽ Konsumsi (km/ltr)</label><input type="number" step="1" value="${p.consumption}" onchange="S.params.consumption=parseFloat(this.value);saveLocal();render()"><span class="ht">Efisiensi motor rental</span></div>
-  <div class="pr"><label>💸 Harga BBM/ltr</label><input type="number" step="500" value="${p.fuelPrice}" onchange="S.params.fuelPrice=parseFloat(this.value);saveLocal();render()"><span class="ht">Harga BBM saat ini (Rp)</span></div>
-  </div>`;
-
-    document.getElementById('p-master').innerHTML = h;
-  }
-
-  function rItin() {
-    const sri = S.trains.find(t => t.name.includes('Sri'));
-    const lod = S.trains.find(t => t.name.includes('Lodaya'));
-    const mal = S.trains.find(t => t.name.includes('Malabar'));
-
-    let h = `<div class="sg"><div class="sbar bg-pu2">🚆 Perjalanan pergi: Surabaya → Yogyakarta → Bandung</div>
-  <table style="table-layout:auto"><thead><tr><th class="th-pu">Tgl</th><th class="th-pu">Jam</th><th class="th-pu">Aktivitas</th><th class="th-pu">Lokasi</th><th class="th-pu">Info</th></tr></thead><tbody>`;
-    if (sri) {
-      const nd = new Date(new Date(sri.arrDate).getTime() + 86400000).toISOString().split('T')[0];
-      const hotY = S.hotels.find(h => h.city === 'Yogyakarta');
-      [[fmtD(sri.depDate), sri.depTime, '🚆 Naik Sri Tanjung', 'Wonokromo', 'Berangkat'],
-      [fmtD(sri.arrDate), sri.arrTime, '📍 Tiba Yogyakarta', 'Stasiun Lempuyangan', 'Transit 1 malam'],
-      [fmtD(sri.arrDate), '20:00', '🏨 Check-in', 'Penginapan Yogya', hotY ? rp(hotY.pricePerNight) + '/malam' : '-'],
-      [fmtD(nd), '08:00', '🗺️ Eksplorasi Yogya', 'Malioboro / Tugu', 'Free time'],
-      ].forEach(r => { h += `<tr>${r.map((v, i) => `<td${i < 2 ? ' style="white-space:nowrap;font-weight:700"' : ''}>${v}</td>`).join('')}</tr>`; });
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Travel Planner Pro - Bandung Weekend</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    if (lod) { h += `<tr><td style="white-space:nowrap;font-weight:700">${fmtD(lod.depDate)}</td><td style="font-weight:700">${lod.depTime}</td><td>🚆 Naik Lodaya</td><td>Stasiun Lempuyangan</td><td>Berangkat ke Bandung</td></tr><tr><td style="white-space:nowrap;font-weight:700">${fmtD(lod.arrDate)}</td><td style="font-weight:700">${lod.arrTime}</td><td>📍 Tiba di Bandung</td><td>Stasiun Bandung</td><td>Lanjut istirahat</td></tr>`; }
-    h += `</tbody></table></div>`;
 
-    h += `<div style="margin-bottom:8px;display:flex;align-items:center;gap:8px">
-    <div style="font-size:11px;font-weight:700;color:var(--nv2)">📅 Hari-hari di Bandung</div>
-    <button class="btn b-add" onclick="addDay()">+ Tambah Hari</button>
-    <span style="font-size:10px;color:#64748B">Drag ☰ untuk reorder aktivitas</span>
-  </div>`;
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', Arial, sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      font-size: 14px;
+      line-height: 1.4;
+    }
 
-    S.days.forEach(day => {
-      h += `<div class="sg">
-    <div class="day-hdr">
-      <span class="drag-handle" style="color:rgba(255,255,255,.6)">☰</span>
-      <span class="d-title">📍 Hari ${S.days.indexOf(day) + 1}</span>
-      <input type="text" value="${day.label}" style="width:160px" onchange="day.label=this.value;saveLocal()" title="Edit nama hari">
-      <span style="font-size:10px;font-weight:400;margin-left:4px">Mulai:</span>
-      <input type="time" value="${day.startTime}" onchange="day.startTime=this.value;saveLocal();rItin()" title="Jam mulai">
-      <button class="btn b-add" onclick="om('activity','add',${day.id})">+ Aktivitas</button>
-      <button class="del-day" onclick="delDay(${day.id})">🗑 Hapus hari</button>
+    :root {
+      --or: #F97316;
+      --ord: #C2410C;
+      --nv: #1E293B;
+      --nv2: #1E3A5F;
+      --tl: #0E7490;
+      --gn: #166534;
+      --pu: #7C3AED;
+      --rd: #DC2626;
+      --bd: #E2E8F0;
+      --alt: #F1F5F9;
+      --wh: #fff;
+      --ab: #FEF3C7;
+      --ib: #1D4ED8;
+    }
+
+    /* Mobile First */
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .hdr {
+      background: #1E293B;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 3px solid var(--or);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .hdr h1 {
+      font-size: 16px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .hd-sub {
+      font-size: 10px;
+      color: #94A3B8;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .bg-or {
+      background: var(--or);
+    }
+
+    .bg-tl {
+      background: var(--tl);
+    }
+
+    .bg-gn {
+      background: var(--gn);
+    }
+
+    .bg-pu {
+      background: var(--pu);
+    }
+
+    /* Tabs - Mobile Scroll */
+    .tabs {
+      display: flex;
+      background: #fff;
+      border-bottom: 2px solid var(--bd);
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      position: sticky;
+      top: 70px;
+      z-index: 99;
+    }
+
+    .tab {
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748B;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tab.on {
+      color: var(--or);
+      border-bottom-color: var(--or);
+    }
+
+    .tab:active {
+      background: var(--alt);
+    }
+
+    /* Panels */
+    .pnl {
+      display: none;
+      padding: 12px;
+    }
+
+    .pnl.on {
+      display: block;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .status-bar.loading {
+      background: #EFF6FF;
+      color: #1E3A5F;
+      border-left: 3px solid var(--tl);
+    }
+
+    .status-bar.success {
+      background: #DCFCE7;
+      color: #166534;
+      border-left: 3px solid var(--gn);
+    }
+
+    .status-bar.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      border-left: 3px solid var(--rd);
+    }
+
+    .status-bar.synced {
+      background: #FEF3C7;
+      color: #92400E;
+      border-left: 3px solid #F59E0B;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .b-add {
+      background: #fff;
+      color: var(--or);
+      border: 1.5px solid var(--or);
+    }
+
+    .b-add:active {
+      background: var(--or);
+      color: #fff;
+    }
+
+    .b-sv {
+      background: var(--gn);
+      color: #fff;
+    }
+
+    .b-cc {
+      background: var(--alt);
+      color: var(--nv);
+      border: 1px solid var(--bd);
+    }
+
+    .b-reset {
+      background: #FEE2E2;
+      color: var(--rd);
+      border: 1px solid #FCA5A5;
+    }
+
+    /* Tables - Mobile Responsive */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 12px;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      min-width: 600px;
+    }
+
+    /* Mobile card view for small screens */
+    @media (max-width: 640px) {
+      table {
+        min-width: 500px;
+      }
+    }
+
+    th {
+      padding: 10px 8px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .th-tl {
+      background: var(--tl);
+    }
+
+    .th-gn {
+      background: var(--gn);
+    }
+
+    .th-pu {
+      background: var(--pu);
+    }
+
+    .th-or {
+      background: var(--or);
+    }
+
+    td {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--bd);
+      vertical-align: middle;
+    }
+
+    tr:nth-child(even) td {
+      background: var(--alt);
+    }
+
+    .tr-tot td {
+      background: var(--ord) !important;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .tr-gnd td {
+      background: var(--or) !important;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .mn {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .iab {
+      background: var(--ab);
+      color: var(--ib);
+      font-weight: 700;
+    }
+
+    /* Action buttons */
+    .ce,
+    .cd {
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    .ce {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #F59E0B;
+    }
+
+    .cd {
+      background: #FEE2E2;
+      color: var(--rd);
+      border: 1px solid #FCA5A5;
+    }
+
+    .ce:active,
+    .cd:active {
+      opacity: 0.7;
+    }
+
+    /* Drag handle */
+    .drag-handle {
+      cursor: grab;
+      color: #94A3B8;
+      font-size: 16px;
+      user-select: none;
+      display: inline-block;
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    /* Modal */
+    .mbg {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .mbg.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--or);
+      padding-bottom: 8px;
+    }
+
+    /* Form grid */
+    .fg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .fg1 {
+      grid-template-columns: 1fr;
+    }
+
+    .fld {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .fld label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+    }
+
+    .fld input,
+    .fld select {
+      padding: 8px 10px;
+      border: 1.5px solid var(--bd);
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+    }
+
+    .fld input:focus,
+    .fld select:focus {
+      border-color: var(--or);
+    }
+
+    .fhi input,
+    .fhi select {
+      background: var(--ab);
+      color: var(--ib);
+      font-weight: 700;
+      border-color: #F59E0B;
+    }
+
+    .mact {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--bd);
+    }
+
+    /* Cards for summary */
+    .ac {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .acard {
+      background: #fff;
+      border: 1.5px solid var(--bd);
+      border-radius: 12px;
+      padding: 12px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .al {
+      font-size: 11px;
+      color: #64748B;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .av {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* Parameter rows */
+    .pr {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      background: var(--alt);
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 640px) {
+      .pr {
+        grid-template-columns: 180px 200px 1fr;
+      }
+    }
+
+    .pr label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pr input {
+      padding: 8px 10px;
+      border: 1.5px solid var(--bd);
+      border-radius: 8px;
+      font-size: 12px;
+      background: var(--ab);
+      color: var(--ib);
+      font-weight: 700;
+      outline: none;
+      width: 100%;
+    }
+
+    .pr .ht {
+      font-size: 10px;
+      color: #64748B;
+      font-style: italic;
+      grid-column: 1 / -1;
+    }
+
+    @media (min-width: 640px) {
+      .pr .ht {
+        grid-column: auto;
+      }
+    }
+
+    /* Day header */
+    .day-hdr {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--or);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .day-hdr .d-title {
+      font-size: 13px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .day-hdr input[type="time"],
+    .day-hdr input[type="text"] {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .day-hdr input[type="text"] {
+      width: 130px;
+    }
+
+    .del-day {
+      background: rgba(220, 38, 38, 0.3);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Info box */
+    .ib {
+      background: #EFF6FF;
+      border-left: 3px solid var(--tl);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #1E3A5F;
+      margin-bottom: 12px;
+    }
+
+    /* Section header */
+    .sbar {
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .bg-nv {
+      background: var(--nv2);
+    }
+
+    .bg-gn2 {
+      background: var(--gn);
+    }
+
+    .bg-pu2 {
+      background: var(--pu);
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top-color: var(--or);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Drag states */
+    .drag-over td {
+      background: #FEF3C7 !important;
+      border-top: 2px solid var(--or);
+    }
+
+    .dragging td {
+      opacity: 0.4;
+      background: #EDE9FE !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="hdr">
+      <span style="font-size:20px">🗺️</span>
+      <div style="flex:1">
+        <h1>Travel Planner Pro</h1>
+        <div class="hd-sub">Bandung Weekend Escape · Live Sync ke Sheets</div>
+      </div>
+      <span class="badge bg-or">CRUD</span>
+      <span class="badge bg-tl">DRAG</span>
+      <span class="badge bg-gn">LIVE</span>
     </div>
-    <table style="table-layout:auto"><thead><tr>
-      <th class="th-or" style="width:24px"></th>
-      <th class="th-or" style="width:50px">Waktu</th>
-      <th class="th-or">Aktivitas</th><th class="th-or">Lokasi</th>
-      <th class="th-or" style="width:70px">Perj. (mnt)</th>
-      <th class="th-or" style="width:70px">Durasi (mnt)</th>
-      <th class="th-or" style="width:70px">Aktual (mnt)</th>
-      <th class="th-or" style="width:80px">Aksi</th>
-    </tr></thead><tbody>`;
-      let cur = t2m(day.startTime);
-      day.activities.forEach(a => {
-        const act = aMin(a.base);
-        h += `<tr draggable="true" data-aid="${a.id}" data-dayid="${day.id}" ondragstart="dStart(event,'act','${a.id}',${day.id})" ondragover="dOver(event)" ondrop="dDrop(event,'act',${day.id})">
-        <td><span class="drag-handle">☰</span></td>
-        <td style="font-weight:700;color:var(--tl);white-space:nowrap">${m2t(cur)}</td>
-        <td style="white-space:normal">${a.act}</td><td style="white-space:normal">${a.loc}</td>
-        <td style="text-align:center;background:var(--ab);color:var(--ib);font-weight:700">${a.base}</td>
-        <td style="text-align:center;background:var(--ab);color:var(--ib);font-weight:700">${a.dur}</td>
-        <td style="text-align:center">${act}</td>
-        <td style="white-space:nowrap"><span class="ce" onclick="om('activity','edit',${day.id},${a.id})">✏️</span> <span class="cd" onclick="di('act',${day.id},${a.id})">🗑</span></td>
-      </tr>`;
-        cur += a.dur + act;
-      });
-      h += `</tbody></table></div>`;
-    });
 
-    h += `<div class="sg"><div class="sbar bg-pu2">🚆 Perjalanan pulang: Bandung → Malang</div>
-  <table style="table-layout:auto"><thead><tr><th class="th-pu">Tgl</th><th class="th-pu">Jam</th><th class="th-pu">Aktivitas</th><th class="th-pu">Lokasi</th><th class="th-pu">Info</th></tr></thead><tbody>`;
-    if (mal) { h += `<tr><td style="white-space:nowrap;font-weight:700">${fmtD(mal.depDate)}</td><td style="font-weight:700">${mal.depTime}</td><td>🚆 Naik Malabar</td><td>Stasiun Bandung</td><td>Berangkat</td></tr><tr><td style="white-space:nowrap;font-weight:700">${fmtD(mal.arrDate)}</td><td style="font-weight:700">${mal.arrTime}</td><td>🏠 Tiba di Malang</td><td>Stasiun Malang</td><td>Selesai!</td></tr>`; }
-    h += `</tbody></table></div>`;
-    document.getElementById('p-itin').innerHTML = h;
-  }
+    <div class="tabs">
+      <div class="tab on" onclick="switchTab('master')">📋 Master</div>
+      <div class="tab" onclick="switchTab('itin')">🗺️ Itinerary</div>
+      <div class="tab" onclick="switchTab('budget')">💰 Budget</div>
+      <div class="tab" onclick="switchTab('adj')">⚙️ Adjustment</div>
+    </div>
 
-  function rBudget() {
-    const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
-    const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
-    let grand = tkt + thn, dayTots = [];
+    <div id="statusBar" class="status-bar loading">
+      <span>🔄 Memuat data dari Google Sheets...</span>
+    </div>
 
-    let h = `<div class="sg"><div class="sbar bg-pu2">🚆 Transportasi & Penginapan Antar Kota</div>
-  <table style="table-layout:auto"><thead><tr><th class="th-pu">#</th><th class="th-pu">Kategori</th><th class="th-pu" style="text-align:right">Total</th></tr></thead><tbody>`;
-    const trows = [...S.trains.map(t => ['🚆 ' + t.name, t.price * t.pax]), ...S.hotels.map(ht => ['🏨 ' + ht.name + ' (' + nights(ht.checkIn, ht.checkOut) + ' mlm)', ht.pricePerNight * nights(ht.checkIn, ht.checkOut)])];
-    trows.forEach((r, i) => { h += `<tr><td>${i + 1}</td><td style="white-space:normal">${r[0]}</td><td class="mn" style="color:var(--gn)">${rp(r[1])}</td></tr>`; });
-    h += `<tr class="tr-tot"><td colspan="2">Total transportasi & penginapan</td><td class="mn">${rp(tkt + thn)}</td></tr></tbody></table></div>`;
-
-    S.days.forEach(day => {
-      let bd = S.budgetDays.find(x => x.dayId === day.id);
-      if (!bd) { bd = { dayId: day.id, items: [] }; S.budgetDays.push(bd); }
-      const b = bbm(day);
-      const dt = bd.items.reduce((a, x) => a + x.amount, 0) + b;
-      dayTots.push({ id: day.id, label: day.label, total: dt });
-      grand += dt;
-      h += `<div class="sg"><div class="sbar bg-or">📅 Budget ${day.label} <button class="btn b-add" onclick="om('budget','add',${day.id})">+ Tambah item</button></div>
-    <table style="table-layout:auto"><thead><tr><th class="th-gn">#</th><th class="th-gn">Kategori</th><th class="th-gn" style="text-align:right">Budget</th><th class="th-gn">Aksi</th></tr></thead><tbody>
-    <tr><td>0</td><td>⛽ BBM Motor (otomatis)</td><td class="mn" style="color:#0F766E">${rp(b)}</td><td>-</td></tr>`;
-      bd.items.forEach((it, i) => {
-        h += `<tr draggable="true" data-bid="${it.id}" data-dayid="${day.id}" ondragstart="dStart(event,'budget','${it.id}',${day.id})" ondragover="dOver(event)" ondrop="dDrop(event,'budget',${day.id})">
-      <td><span class="drag-handle">☰</span></td><td style="white-space:normal">${it.cat}</td>
-      <td class="mn iab">${rp(it.amount)}</td>
-      <td style="white-space:nowrap"><span class="ce" onclick="om('budget','edit',${day.id},${it.id})">✏️</span> <span class="cd" onclick="di('budget',${day.id},${it.id})">🗑</span></td>
-      </tr>`;
-      });
-      h += `<tr class="tr-tot"><td colspan="2">Total ${day.label}</td><td class="mn">${rp(dt)}</td><td></td></tr></tbody></table></div>`;
-    });
-
-    const sisa = S.budgetAwal - grand;
-    h += `<div class="sg"><div class="sbar bg-nv">📊 Summary budget trip</div>
-  <table style="table-layout:auto"><thead><tr><th>#</th><th>Kategori</th><th style="text-align:right">Total</th></tr></thead><tbody>
-  <tr><td>1</td><td>Transportasi & Penginapan Antar Kota</td><td class="mn">${rp(tkt + thn)}</td></tr>`;
-    dayTots.forEach((d, i) => { h += `<tr><td>${i + 2}</td><td>Budget ${d.label}</td><td class="mn">${rp(d.total)}</td></tr>`; });
-    h += `<tr class="tr-gnd"><td colspan="2">🏆 Grand Total Trip</td><td class="mn">${rp(grand)}</td></tr></tbody></table>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
-    <div class="acard"><div class="al">🎯 Budget Awal</div><input type="number" step="50000" value="${S.budgetAwal}" style="width:100%;text-align:center;font-size:13px;font-weight:700;border:1.5px solid var(--bd);border-radius:4px;padding:4px;color:var(--ib);background:var(--ab)" onchange="S.budgetAwal=parseFloat(this.value);saveLocal();rBudget();rAdj()"></div>
-    <div class="acard"><div class="al">🔥 Total Estimasi</div><div class="av" style="color:var(--or)">${rp(grand)}</div></div>
-    <div class="acard" style="border-color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}"><div class="al">${sisa >= 0 ? '✅' : '⚠️'} Sisa Dana</div><div class="av" style="color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(sisa)}</div></div>
-  </div></div>`;
-    document.getElementById('p-budget').innerHTML = h;
-  }
-
-  function rAdj() {
-    const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
-    const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
-    let grand = tkt + thn;
-    S.days.forEach(day => { const bd = S.budgetDays.find(x => x.dayId === day.id); grand += (bd ? bd.items.reduce((a, x) => a + x.amount, 0) : 0) + bbm(day); });
-    const sisa = S.budgetAwal - grand;
-    const totalJam = S.days.reduce((a, d) => a + d.activities.reduce((s, x) => s + aMin(x.base), 0), 0);
-
-    let h = `<div class="sg"><div class="sbar bg-tl" style="background:var(--tl)">🎯 Ringkasan perjalanan</div>
-  <div class="ac">
-    <div class="acard"><div class="al">Tiket kereta</div><div class="av" style="color:var(--tl)">${rp(tkt)}</div></div>
-    <div class="acard"><div class="al">Penginapan</div><div class="av" style="color:var(--tl)">${rp(thn)}</div></div>
-    <div class="acard"><div class="al">Makan & Aktivitas</div><div class="av" style="color:var(--or)">${rp(grand - tkt - thn)}</div></div>
-    <div class="acard" style="background:var(--nv2)"><div class="al" style="color:#94A3B8">Durasi motor</div><div class="av" style="color:#fff">${(totalJam / 60).toFixed(1)} jam</div></div>
-    <div class="acard"><div class="al">Jumlah hari</div><div class="av" style="color:var(--pu)">${S.days.length} hari</div></div>
-  </div></div>
-
-  <div class="sg"><div class="sbar bg-or">⚙️ Adjustment — ubah di sini, semua otomatis berubah</div>
-  <div style="background:#fff;border:1px solid var(--bd);border-radius:7px;padding:10px">
-    <div class="pr"><label>⏱ Faktor waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${S.params.faktor}" onchange="S.params.faktor=parseFloat(this.value);saveLocal();render()"><span class="ht">1.0=Normal · 1.3=Macet · 0.8=Lancar — geser semua jam itinerary</span></div>
-    <div class="pr"><label>🏎 Kecepatan (km/j)</label><input type="number" step="1" value="${S.params.speed}" onchange="S.params.speed=parseFloat(this.value);saveLocal();render()"><span class="ht">Rata-rata kecepatan motor</span></div>
-    <div class="pr"><label>⛽ Harga BBM/ltr</label><input type="number" step="500" value="${S.params.fuelPrice}" onchange="S.params.fuelPrice=parseFloat(this.value);saveLocal();render()"><span class="ht">Dipakai hitung budget BBM per hari</span></div>
-    ${S.days.map(d => `<div class="pr"><label>⏰ Jam mulai — ${d.label}</label><input type="time" value="${d.startTime}" onchange="d.startTime=this.value;saveLocal();render()"><span class="ht">Jam mulai aktivitas hari ini</span></div>`).join('')}
-  </div></div>
-
-  <div class="sg"><div class="sbar bg-gn2">💰 Prediksi sisa dana</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
-    <div class="acard"><div class="al">🎯 Budget Awal</div><input type="number" step="50000" value="${S.budgetAwal}" style="width:100%;text-align:center;font-size:14px;font-weight:700;border:1.5px solid var(--bd);border-radius:4px;padding:5px;color:var(--ib);background:var(--ab);margin-top:4px" onchange="S.budgetAwal=parseFloat(this.value);saveLocal();render()"></div>
-    <div class="acard"><div class="al">🔥 Total Estimasi</div><div class="av" style="color:var(--rd)">${rp(grand)}</div></div>
-    <div class="acard" style="border:2px solid ${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}"><div class="al">${sisa >= 0 ? '✅' : '⚠️'} Sisa Dana</div><div class="av" style="font-size:16px;color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(sisa)}</div></div>
+    <div id="p-master" class="pnl on"></div>
+    <div id="p-itin" class="pnl"></div>
+    <div id="p-budget" class="pnl"></div>
+    <div id="p-adj" class="pnl"></div>
   </div>
-  <div style="background:${sisa >= 0 ? '#DCFCE7' : '#FEE2E2'};border-radius:6px;padding:8px 12px;font-size:11px;color:${sisa >= 0 ? '#166534' : '#991B1B'}">
-    ${sisa >= 0 ? `✅ Budget aman! Sisa <b>${rp(sisa)}</b> bisa jadi dana darurat.` : `⚠️ Budget kurang <b>${rp(Math.abs(sisa))}</b>. Kurangi kategori atau tambah budget awal.`}
-  </div></div>
 
-  <button class="btn b-reset" onclick="if(confirm('Reset semua ke default?')){S=JSON.parse(JSON.stringify(DEF));saveLocal();render()}">🔄 Reset ke default</button>`;
-    document.getElementById('p-adj').innerHTML = h;
-  }
-
-  function rSync() {
-    const stHtml = syncStatus
-      ? `<div class="ss ${syncStatus.ok ? 'ok' : 'er'}">
-        ${syncStatus.ok ? '✅' : '❌'} ${syncStatus.msg}
-        <span style="font-size:10px;color:#64748B;margin-left:auto">${syncStatus.time}</span>
-       </div>`
-      : '';
-    let h = `<div class="sg"><div class="sbar bg-nv">☁️ Google Sheets Sync</div>
-  <div class="ib">Data disinkronkan ke Google Sheets menggunakan Google Apps Script. Pastikan spreadsheet sudah punya sheet: <b>transports, itineraries, budgets, tripInfo</b>.</div>
-  ${stHtml}
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-    <div style="background:#fff;border:1px solid var(--bd);border-radius:7px;padding:14px">
-      <div style="font-size:11px;font-weight:700;color:var(--gn);margin-bottom:8px">📤 Upload ke Sheets</div>
-      <div style="font-size:10px;color:#64748B;margin-bottom:10px">Kirim semua data lokal (tiket, penginapan, itinerary, budget) ke Google Sheets.</div>
-      <button class="btn b-sv" style="width:100%;justify-content:center" onclick="syncSave()">☁️ Upload ke Sheets</button>
-    </div>
-    <div style="background:#fff;border:1px solid var(--bd);border-radius:7px;padding:14px">
-      <div style="font-size:11px;font-weight:700;color:var(--tl);margin-bottom:8px">📥 Download dari Sheets</div>
-      <div style="font-size:10px;color:#64748B;margin-bottom:10px">Ambil data terbaru dari Google Sheets, gantikan data lokal.</div>
-      <button class="btn b-sync" style="width:100%;justify-content:center" onclick="syncLoad()">📥 Download dari Sheets</button>
+  <div class="mbg" id="mbg">
+    <div class="modal">
+      <h3 id="mt">Form</h3>
+      <div id="mb"></div>
+      <div class="mact">
+        <button class="btn b-cc" onclick="closeModal()">Batal</button>
+        <button class="btn b-sv" onclick="saveModal()">Simpan</button>
+      </div>
     </div>
   </div>
-  <div style="background:#fff;border:1px solid var(--bd);border-radius:7px;padding:12px">
-    <div style="font-size:11px;font-weight:700;margin-bottom:8px">📊 Data yang akan disinkronkan</div>
-    <table style="table-layout:auto"><thead><tr><th class="th-tl">Sheet</th><th class="th-tl">Isi</th><th class="th-tl">Jumlah Item</th></tr></thead><tbody>
-    <tr><td>transports</td><td>Tiket kereta + penginapan</td><td>${S.trains.length} tiket, ${S.hotels.length} penginapan</td></tr>
-    <tr><td>itineraries</td><td>Hari & aktivitas</td><td>${S.days.length} hari, ${S.days.reduce((a, d) => a + d.activities.length, 0)} aktivitas</td></tr>
-    <tr><td>budgets</td><td>Budget per hari + parameter</td><td>${S.budgetDays.reduce((a, b) => a + b.items.length, 0)} item budget</td></tr>
-    <tr><td>tripInfo</td><td>Pengaturan & parameter umum</td><td>Faktor: ${S.params.faktor}x, BBM: ${rp(S.params.fuelPrice)}/ltr</td></tr>
-    </tbody></table>
-  </div></div>`;
-    document.getElementById('p-sync').innerHTML = h;
-  }
 
-  async function syncSave() {
-    const payload = {
-      transports: { trains: S.trains, hotels: S.hotels },
-      itineraries: { days: S.days },
-      budgets: { days: S.budgetDays, budgetAwal: S.budgetAwal },
-      tripInfo: { params: S.params }
+  <script>
+    // Google Apps Script URL (GANTI DENGAN URL DEPLOY ANDA)
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzwBqHsm10ZufbBMHzNOqUreo8jpfCBjK28ZWQ9Pqsl3_nFeQAx3Ns0TNU1Z4maLQIP/exec';
+
+    let S = {
+      trains: [],
+      hotels: [],
+      params: { faktor: 1.0, speed: 30, consumption: 35, fuelPrice: 10000 },
+      days: [],
+      budgetDays: [],
+      budgetAwal: 2500000
     };
 
-    const form = new FormData();
-    form.append('data', JSON.stringify(payload));
+    let nextIds = { tr: 1, ht: 1, day: 1, act: 1, bu: 1 };
+    let modalContext = null;
+    let dragSrc = null;
+    let isLoading = false;
 
-    const r = await fetch(GAS_URL + '?action=save', {
-      method: 'POST',
-      body: form
-    });
+    // Helper functions
+    const rp = (n) => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+    const fmtD = (d) => {
+      if (!d) return '-';
+      const [y, m, dd] = d.split('-');
+      const mn = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+      return dd + ' ' + mn[parseInt(m) - 1] + ' ' + y;
+    };
+    const nights = (ci, co) => Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
+    const t2m = (t) => { if (!t) return 0; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+    const m2t = (m) => { const h = Math.floor(m / 60) % 24, mm = m % 60; return String(h).padStart(2, '0') + ':' + String(mm).padStart(2, '0'); };
+    const aMin = (b) => Math.round(b * (S.params.faktor || 1));
+    const bbm = (day) => {
+      const tot = day.activities.reduce((a, x) => a + aMin(x.base), 0);
+      return Math.round(tot / 60 * S.params.speed / S.params.consumption * S.params.fuelPrice);
+    };
 
-    const j = await r.json();
-  }
-
-  async function syncLoad() {
-    syncStatus = { ok: false, msg: 'Mengambil data dari Google Sheets...', time: new Date().toLocaleTimeString() };
-    rSync();
-    try {
-      const r = await fetch(GAS_URL + '?action=load');
-      const j = await r.json();
-      if (j.status === 'success' && j.data) {
-        const d = j.data;
-        if (d.transports && d.transports.trains) S.trains = d.transports.trains;
-        if (d.transports && d.transports.hotels) S.hotels = d.transports.hotels;
-        if (d.itineraries && d.itineraries.days) S.days = d.itineraries.days;
-        if (d.budgets && d.budgets.days) S.budgetDays = d.budgets.days;
-        if (d.budgets && d.budgets.budgetAwal) S.budgetAwal = d.budgets.budgetAwal;
-        if (d.tripInfo && d.tripInfo.params) S.params = d.tripInfo.params;
-        await saveLocal();
-        syncStatus = { ok: true, msg: 'Download berhasil! Data dari Google Sheets dimuat.', time: new Date().toLocaleTimeString() };
-        render();
-      } else {
-        syncStatus = { ok: false, msg: 'Data kosong atau format tidak valid dari Sheets.', time: new Date().toLocaleTimeString() };
+    function showStatus(message, type = 'loading') {
+      const bar = document.getElementById('statusBar');
+      const icons = { loading: '🔄', success: '✅', error: '❌', synced: '☁️' };
+      bar.innerHTML = `<span>${icons[type] || 'ℹ️'} ${message}</span>`;
+      bar.className = `status-bar ${type}`;
+      if (type !== 'loading') {
+        setTimeout(() => {
+          if (document.getElementById('statusBar').className === `status-bar ${type}`) {
+            bar.className = 'status-bar';
+            bar.innerHTML = '<span>✅ Data siap</span>';
+          }
+        }, 3000);
       }
-    } catch (e) {
-      syncStatus = { ok: false, msg: 'Gagal konek ke Google Sheets. Cek koneksi & URL Apps Script.', time: new Date().toLocaleTimeString() };
     }
-    rSync();
-  }
 
-  function addDay() {
-    const newId = NI.day++;
-    S.days.push({ id: newId, label: 'Hari Baru ' + S.days.length, startTime: '08:00', activities: [] });
-    S.budgetDays.push({ dayId: newId, items: [] });
-    saveLocal(); rItin(); rBudget();
-  }
+    // Load from Google Sheets
+    async function loadFromSheets() {
+      if (isLoading) return;
+      isLoading = true;
+      showStatus('Mengambil data dari Google Sheets...', 'loading');
 
-  function delDay(id) {
-    if (!confirm('Hapus hari ini beserta semua aktivitasnya?')) return;
-    S.days = S.days.filter(d => d.id !== id);
-    S.budgetDays = S.budgetDays.filter(b => b.dayId !== id);
-    saveLocal(); render();
-  }
+      try {
+        const response = await fetch(`${GAS_URL}?action=load&t=${Date.now()}`);
+        const result = await response.json();
 
-  function dStart(e, type, id, dayId) {
-    dragSrc = { type, id: String(id), dayId };
-    e.dataTransfer.effectAllowed = 'move';
-    setTimeout(() => e.target.closest('tr').classList.add('dragging'), 0);
-  }
+        if (result.status === 'success' && result.data) {
+          const d = result.data;
+          if (d.transports) {
+            S.trains = d.transports.trains || [];
+            S.hotels = d.transports.hotels || [];
+          }
+          if (d.itineraries && d.itineraries.days) S.days = d.itineraries.days;
+          if (d.budgets) {
+            S.budgetDays = d.budgets.days || [];
+            S.budgetAwal = d.budgets.budgetAwal || 2500000;
+          }
+          if (d.tripInfo && d.tripInfo.params) S.params = d.tripInfo.params;
 
-  function dOver(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    const tr = e.target.closest('tr');
-    document.querySelectorAll('tr.drag-over').forEach(r => r.classList.remove('drag-over'));
-    if (tr) tr.classList.add('drag-over');
-  }
+          // Update nextIds
+          S.trains.forEach(t => { if (t.id >= nextIds.tr) nextIds.tr = t.id + 1; });
+          S.hotels.forEach(h => { if (h.id >= nextIds.ht) nextIds.ht = h.id + 1; });
+          S.days.forEach(d => {
+            if (d.id >= nextIds.day) nextIds.day = d.id + 1;
+            d.activities.forEach(a => { if (a.id >= nextIds.act) nextIds.act = a.id + 1; });
+          });
+          S.budgetDays.forEach(bd => {
+            bd.items.forEach(i => { if (i.id >= nextIds.bu) nextIds.bu = i.id + 1; });
+          });
 
-  function dDrop(e, type, dayId) {
-    e.preventDefault();
-    document.querySelectorAll('tr.drag-over').forEach(r => r.classList.remove('drag-over'));
-    document.querySelectorAll('tr.dragging').forEach(r => r.classList.remove('dragging'));
-    const target = e.target.closest('tr');
-    if (!target || !dragSrc) return;
-
-    if (type === 'train' && dragSrc.type === 'train') {
-      const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id || '0');
-      const fi = S.trains.findIndex(x => x.id === fromId), ti = S.trains.findIndex(x => x.id === toId);
-      if (fi >= 0 && ti >= 0 && fi !== ti) { const [item] = S.trains.splice(fi, 1); S.trains.splice(ti, 0, item); }
-    } else if (type === 'hotel' && dragSrc.type === 'hotel') {
-      const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id || '0');
-      const fi = S.hotels.findIndex(x => x.id === fromId), ti = S.hotels.findIndex(x => x.id === toId);
-      if (fi >= 0 && ti >= 0 && fi !== ti) { const [item] = S.hotels.splice(fi, 1); S.hotels.splice(ti, 0, item); }
-    } else if (type === 'act' && dragSrc.type === 'act') {
-      const day = S.days.find(d => d.id === dayId);
-      if (!day) return;
-      const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.aid || '0');
-      const fi = day.activities.findIndex(x => x.id === fromId), ti = day.activities.findIndex(x => x.id === toId);
-      if (fi >= 0 && ti >= 0 && fi !== ti) { const [item] = day.activities.splice(fi, 1); day.activities.splice(ti, 0, item); }
-    } else if (type === 'budget' && dragSrc.type === 'budget') {
-      const bd = S.budgetDays.find(b => b.dayId === dayId);
-      if (!bd) return;
-      const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.bid || '0');
-      const fi = bd.items.findIndex(x => x.id === fromId), ti = bd.items.findIndex(x => x.id === toId);
-      if (fi >= 0 && ti >= 0 && fi !== ti) { const [item] = bd.items.splice(fi, 1); bd.items.splice(ti, 0, item); }
+          showStatus('Data berhasil dimuat dari Google Sheets!', 'success');
+          renderAll();
+        } else {
+          showStatus('Gagal memuat data: ' + (result.message || 'Unknown error'), 'error');
+          loadDefaultData();
+        }
+      } catch (err) {
+        console.error('Load error:', err);
+        showStatus('Gagal konek ke Google Sheets. Memuat data default...', 'error');
+        loadDefaultData();
+      }
+      isLoading = false;
     }
-    dragSrc = null; saveLocal(); render();
-  }
 
-  function om(type, mode, ...args) {
-    MCX = { type, mode, args };
-    document.getElementById('mbg').classList.add('open');
-    const t = document.getElementById('mt'), b = document.getElementById('mb');
-    if (type === 'train') {
-      const d = mode === 'edit' ? S.trains.find(x => x.id === args[0]) : { name: '', route: '', depDate: '', depTime: '', arrDate: '', arrTime: '', price: 0, pax: 1, status: 'estimasi' };
-      t.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' tiket kereta';
-      b.innerHTML = `<div class="fg"><div class="fld"><label>Nama Kereta</label><input id="fn" value="${d.name}"></div><div class="fld"><label>Rute</label><input id="fr" value="${d.route}"></div><div class="fld"><label>Tgl Berangkat</label><input type="date" id="fdd" value="${d.depDate}"></div><div class="fld"><label>Jam Berangkat</label><input type="time" id="fdt" value="${d.depTime}"></div><div class="fld"><label>Tgl Tiba</label><input type="date" id="fad" value="${d.arrDate}"></div><div class="fld"><label>Jam Tiba</label><input type="time" id="fat" value="${d.arrTime}"></div><div class="fld fhi"><label>Harga/Orang (Rp)</label><input type="number" id="fp" value="${d.price}"></div><div class="fld fhi"><label>Jumlah Penumpang</label><input type="number" id="fpx" value="${d.pax}" min="1"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
-    } else if (type === 'hotel') {
-      const d = mode === 'edit' ? S.hotels.find(x => x.id === args[0]) : { name: '', city: '', checkIn: '', checkOut: '', pricePerNight: 0, status: 'estimasi' };
-      t.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' penginapan';
-      b.innerHTML = `<div class="fg"><div class="fld"><label>Nama Penginapan</label><input id="fn" value="${d.name}"></div><div class="fld"><label>Kota</label><input id="fc" value="${d.city}"></div><div class="fld"><label>Tgl Check-in</label><input type="date" id="fci" value="${d.checkIn}"></div><div class="fld"><label>Tgl Check-out</label><input type="date" id="fco" value="${d.checkOut}"></div><div class="fld fhi"><label>Harga/Malam (Rp)</label><input type="number" id="fp" value="${d.pricePerNight}"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
-    } else if (type === 'activity') {
-      const dayId = args[0], actId = args[1];
-      const day = S.days.find(d => d.id === dayId);
-      const d = mode === 'edit' ? (day ? day.activities.find(x => x.id === actId) : null) || {} : { act: '', loc: '', base: 0, dur: 30 };
-      t.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' aktivitas — ' + (day ? day.label : '');
-      b.innerHTML = `<div class="fg fg1"><div class="fld"><label>Nama Aktivitas</label><input id="fa" value="${d.act || ''}"></div><div class="fld"><label>Lokasi</label><input id="fl" value="${d.loc || ''}"></div></div><div class="fg"><div class="fld fhi"><label>Perjalanan Dasar (menit)</label><input type="number" id="fb" value="${d.base || 0}" min="0"></div><div class="fld fhi"><label>Durasi Aktivitas (menit)</label><input type="number" id="fd" value="${d.dur || 30}" min="0"></div></div><p style="font-size:10px;color:#64748B;margin-top:8px">Aktual = Dasar × Faktor (${S.params.faktor}x). Ubah faktor di Adjustment.</p>`;
-    } else if (type === 'budget') {
-      const dayId = args[0], itemId = args[1];
-      const bd = S.budgetDays.find(b => b.dayId === dayId);
-      const day = S.days.find(d => d.id === dayId);
-      const d = mode === 'edit' ? (bd ? bd.items.find(x => x.id === itemId) : null) || {} : { cat: '', amount: 0 };
-      t.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' budget — ' + (day ? day.label : '');
-      b.innerHTML = `<div class="fg fg1"><div class="fld"><label>Kategori</label><input id="fcat" value="${d.cat || ''}"></div><div class="fld fhi"><label>Budget (Rp)</label><input type="number" id="fam" value="${d.amount || 0}" min="0"></div></div>`;
+    // Save to Google Sheets
+    async function saveToSheets() {
+      showStatus('Menyimpan ke Google Sheets...', 'loading');
+
+      const payload = {
+        transports: { trains: S.trains, hotels: S.hotels },
+        itineraries: { days: S.days },
+        budgets: { days: S.budgetDays, budgetAwal: S.budgetAwal },
+        tripInfo: { params: S.params }
+      };
+
+      const formData = new FormData();
+      formData.append('action', 'save');
+      formData.append('data', JSON.stringify(payload));
+
+      try {
+        const response = await fetch(GAS_URL, { method: 'POST', body: formData });
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          showStatus('Data berhasil disimpan ke Google Sheets!', 'success');
+        } else {
+          showStatus('Gagal menyimpan: ' + (result.message || 'Unknown error'), 'error');
+        }
+      } catch (err) {
+        console.error('Save error:', err);
+        showStatus('Gagal menyimpan ke Google Sheets!', 'error');
+      }
     }
-  }
 
-  function cm() { document.getElementById('mbg').classList.remove('open'); }
-
-  function sm() {
-    const { type, mode, args } = MCX;
-    const g = id => document.getElementById(id)?.value || '';
-    const gn = id => parseFloat(document.getElementById(id)?.value) || 0;
-    const gi = id => parseInt(document.getElementById(id)?.value) || 0;
-    if (type === 'train') {
-      const o = { name: g('fn'), route: g('fr'), depDate: g('fdd'), depTime: g('fdt'), arrDate: g('fad'), arrTime: g('fat'), price: gn('fp'), pax: gi('fpx') || 1, status: g('fs') };
-      if (mode === 'add') { o.id = NI.tr++; S.trains.push(o); } else { const i = S.trains.findIndex(x => x.id === args[0]); if (i >= 0) { o.id = args[0]; S.trains[i] = o; } }
-    } else if (type === 'hotel') {
-      const o = { name: g('fn'), city: g('fc'), checkIn: g('fci'), checkOut: g('fco'), pricePerNight: gn('fp'), status: g('fs') };
-      if (mode === 'add') { o.id = NI.ht++; S.hotels.push(o); } else { const i = S.hotels.findIndex(x => x.id === args[0]); if (i >= 0) { o.id = args[0]; S.hotels[i] = o; } }
-    } else if (type === 'activity') {
-      const dayId = args[0], actId = args[1];
-      const day = S.days.find(d => d.id === dayId);
-      if (!day) return cm();
-      const o = { act: g('fa'), loc: g('fl'), base: gi('fb'), dur: gi('fd') };
-      if (mode === 'add') { o.id = NI.act++; day.activities.push(o); } else { const i = day.activities.findIndex(x => x.id === actId); if (i >= 0) { o.id = actId; day.activities[i] = o; } }
-    } else if (type === 'budget') {
-      const dayId = args[0], itemId = args[1];
-      let bd = S.budgetDays.find(b => b.dayId === dayId);
-      if (!bd) { bd = { dayId, items: [] }; S.budgetDays.push(bd); }
-      const o = { cat: g('fcat'), amount: gn('fam') };
-      if (mode === 'add') { o.id = NI.bu++; bd.items.push(o); } else { const i = bd.items.findIndex(x => x.id === itemId); if (i >= 0) { o.id = itemId; bd.items[i] = o; } }
+    // Load default data
+    function loadDefaultData() {
+      S = {
+        trains: [
+          { id: 1, name: "Sri Tanjung (Ekonomi)", route: "Wonokromo → Lempuyangan", depDate: "2026-07-01", depTime: "14:39", arrDate: "2026-07-01", arrTime: "19:33", price: 150000, pax: 2, status: "estimasi" },
+          { id: 2, name: "Lodaya (Eksekutif)", route: "Yogyakarta → Bandung", depDate: "2026-07-02", depTime: "20:01", arrDate: "2026-07-03", arrTime: "03:14", price: 220000, pax: 2, status: "estimasi" },
+          { id: 3, name: "Malabar (Eksekutif)", route: "Bandung → Malang", depDate: "2026-07-05", depTime: "18:10", arrDate: "2026-07-06", arrTime: "06:52", price: 180000, pax: 2, status: "estimasi" },
+        ],
+        hotels: [
+          { id: 1, name: "Penginapan Yogyakarta (Transit)", city: "Yogyakarta", checkIn: "2026-07-01", checkOut: "2026-07-02", pricePerNight: 89000, status: "konfirmasi" },
+          { id: 2, name: "Dreamstay Bandung", city: "Bandung", checkIn: "2026-07-03", checkOut: "2026-07-05", pricePerNight: 0, status: "estimasi" },
+        ],
+        params: { faktor: 1.0, speed: 30, consumption: 35, fuelPrice: 10000 },
+        days: [
+          {
+            id: 1, label: "Jumat, 03 Jul 2026", startTime: "06:00", activities: [
+              { id: 1, act: "Sarapan Bubur Kang Dedi", loc: "Jl. Sudirman", base: 15, dur: 40 },
+              { id: 2, act: "Beli Pukis Lumer", loc: "Leuwi Panjang", base: 20, dur: 15 },
+              { id: 3, act: "Titip Koper", loc: "Dreamstay", base: 15, dur: 10 },
+              { id: 4, act: "Ke Al Jabbar", loc: "Bandung Timur", base: 25, dur: 45 },
+            ]
+          },
+          {
+            id: 2, label: "Sabtu, 04 Jul 2026", startTime: "03:00", activities: [
+              { id: 1, act: "Bangun & Beli Bekal", loc: "Dreamstay", base: 5, dur: 15 },
+              { id: 2, act: "Berangkat ke Cukul", loc: "Pangalengan", base: 90, dur: 0 },
+              { id: 3, act: "Sunrise Point", loc: "Sunrise Point Cukul", base: 0, dur: 120 },
+            ]
+          },
+        ],
+        budgetDays: [],
+        budgetAwal: 2500000,
+      };
+      S.budgetDays = S.days.map(d => ({ dayId: d.id, items: [] }));
+      renderAll();
+      saveToSheets();
     }
-    saveLocal(); render(); cm();
-  }
 
-  function di(type, ...args) {
-    if (!confirm('Hapus item ini?')) return;
-    if (type === 'train') S.trains = S.trains.filter(x => x.id !== args[0]);
-    else if (type === 'hotel') S.hotels = S.hotels.filter(x => x.id !== args[0]);
-    else if (type === 'act') { const day = S.days.find(d => d.id === args[0]); if (day) day.activities = day.activities.filter(x => x.id !== args[1]); }
-    else if (type === 'budget') { const bd = S.budgetDays.find(b => b.dayId === args[0]); if (bd) bd.items = bd.items.filter(x => x.id !== args[1]); }
-    saveLocal(); render();
-  }
+    // CRUD Operations with auto-save
+    async function mutate(callback) {
+      callback();
+      renderAll();
+      await saveToSheets();
+    }
 
-  document.getElementById('mbg').addEventListener('click', function (e) { if (e.target === this) cm(); });
+    function addDay() {
+      mutate(() => {
+        const newId = nextIds.day++;
+        S.days.push({ id: newId, label: 'Hari Baru ' + (S.days.length + 1), startTime: '08:00', activities: [] });
+        S.budgetDays.push({ dayId: newId, items: [] });
+      });
+    }
 
-  loadLocal().then(() => render());
-</script>
+    function delDay(id) {
+      if (!confirm('Hapus hari ini beserta semua aktivitasnya?')) return;
+      mutate(() => {
+        S.days = S.days.filter(d => d.id !== id);
+        S.budgetDays = S.budgetDays.filter(b => b.dayId !== id);
+      });
+    }
+
+    function deleteItem(type, ...args) {
+      if (!confirm('Hapus item ini?')) return;
+      mutate(() => {
+        if (type === 'train') S.trains = S.trains.filter(x => x.id !== args[0]);
+        else if (type === 'hotel') S.hotels = S.hotels.filter(x => x.id !== args[0]);
+        else if (type === 'act') {
+          const day = S.days.find(d => d.id === args[0]);
+          if (day) day.activities = day.activities.filter(x => x.id !== args[1]);
+        }
+        else if (type === 'budget') {
+          const bd = S.budgetDays.find(b => b.dayId === args[0]);
+          if (bd) bd.items = bd.items.filter(x => x.id !== args[1]);
+        }
+      });
+    }
+
+    // Drag & Drop
+    function onDragStart(e, type, id, dayId) {
+      dragSrc = { type, id: String(id), dayId };
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => e.target.closest('tr')?.classList.add('dragging'), 0);
+    }
+
+    function onDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      const tr = e.target.closest('tr');
+      document.querySelectorAll('tr.drag-over').forEach(r => r.classList.remove('drag-over'));
+      if (tr) tr.classList.add('drag-over');
+    }
+
+    function onDrop(e, type, dayId) {
+      e.preventDefault();
+      document.querySelectorAll('tr.drag-over').forEach(r => r.classList.remove('drag-over'));
+      document.querySelectorAll('tr.dragging').forEach(r => r.classList.remove('dragging'));
+      const target = e.target.closest('tr');
+      if (!target || !dragSrc) return;
+
+      mutate(() => {
+        if (type === 'train' && dragSrc.type === 'train') {
+          const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id);
+          const fi = S.trains.findIndex(x => x.id === fromId);
+          const ti = S.trains.findIndex(x => x.id === toId);
+          if (fi >= 0 && ti >= 0 && fi !== ti) {
+            const [item] = S.trains.splice(fi, 1);
+            S.trains.splice(ti, 0, item);
+          }
+        } else if (type === 'hotel' && dragSrc.type === 'hotel') {
+          const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id);
+          const fi = S.hotels.findIndex(x => x.id === fromId);
+          const ti = S.hotels.findIndex(x => x.id === toId);
+          if (fi >= 0 && ti >= 0 && fi !== ti) {
+            const [item] = S.hotels.splice(fi, 1);
+            S.hotels.splice(ti, 0, item);
+          }
+        } else if (type === 'act' && dragSrc.type === 'act') {
+          const day = S.days.find(d => d.id === dayId);
+          if (day) {
+            const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.aid);
+            const fi = day.activities.findIndex(x => x.id === fromId);
+            const ti = day.activities.findIndex(x => x.id === toId);
+            if (fi >= 0 && ti >= 0 && fi !== ti) {
+              const [item] = day.activities.splice(fi, 1);
+              day.activities.splice(ti, 0, item);
+            }
+          }
+        }
+      });
+      dragSrc = null;
+    }
+
+    // Modal handling
+    function openModal(type, mode, ...args) {
+      modalContext = { type, mode, args };
+      document.getElementById('mbg').classList.add('open');
+      const title = document.getElementById('mt');
+      const body = document.getElementById('mb');
+
+      if (type === 'train') {
+        const d = mode === 'edit' ? S.trains.find(x => x.id === args[0]) : { name: '', route: '', depDate: '', depTime: '', arrDate: '', arrTime: '', price: 0, pax: 1, status: 'estimasi' };
+        title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Tiket Kereta';
+        body.innerHTML = `<div class="fg"><div class="fld"><label>Nama Kereta</label><input id="fn" value="${d.name || ''}"></div><div class="fld"><label>Rute</label><input id="fr" value="${d.route || ''}"></div><div class="fld"><label>Tgl Berangkat</label><input type="date" id="fdd" value="${d.depDate || ''}"></div><div class="fld"><label>Jam Berangkat</label><input type="time" id="fdt" value="${d.depTime || ''}"></div><div class="fld"><label>Tgl Tiba</label><input type="date" id="fad" value="${d.arrDate || ''}"></div><div class="fld"><label>Jam Tiba</label><input type="time" id="fat" value="${d.arrTime || ''}"></div><div class="fld fhi"><label>Harga/Orang (Rp)</label><input type="number" id="fp" value="${d.price || 0}"></div><div class="fld fhi"><label>Jumlah Penumpang</label><input type="number" id="fpx" value="${d.pax || 1}" min="1"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
+      } else if (type === 'hotel') {
+        const d = mode === 'edit' ? S.hotels.find(x => x.id === args[0]) : { name: '', city: '', checkIn: '', checkOut: '', pricePerNight: 0, status: 'estimasi' };
+        title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Penginapan';
+        body.innerHTML = `<div class="fg"><div class="fld"><label>Nama Penginapan</label><input id="fn" value="${d.name || ''}"></div><div class="fld"><label>Kota</label><input id="fc" value="${d.city || ''}"></div><div class="fld"><label>Tgl Check-in</label><input type="date" id="fci" value="${d.checkIn || ''}"></div><div class="fld"><label>Tgl Check-out</label><input type="date" id="fco" value="${d.checkOut || ''}"></div><div class="fld fhi"><label>Harga/Malam (Rp)</label><input type="number" id="fp" value="${d.pricePerNight || 0}"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
+      } else if (type === 'activity') {
+        const dayId = args[0], actId = args[1];
+        const day = S.days.find(d => d.id === dayId);
+        const d = mode === 'edit' && day ? day.activities.find(x => x.id === actId) || {} : { act: '', loc: '', base: 0, dur: 30 };
+        title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Aktivitas';
+        body.innerHTML = `<div class="fg fg1"><div class="fld"><label>Nama Aktivitas</label><input id="fa" value="${d.act || ''}"></div><div class="fld"><label>Lokasi</label><input id="fl" value="${d.loc || ''}"></div></div><div class="fg"><div class="fld fhi"><label>Perjalanan Dasar (menit)</label><input type="number" id="fb" value="${d.base || 0}" min="0"></div><div class="fld fhi"><label>Durasi Aktivitas (menit)</label><input type="number" id="fd" value="${d.dur || 30}" min="0"></div></div>`;
+      } else if (type === 'budget') {
+        const dayId = args[0], itemId = args[1];
+        const bd = S.budgetDays.find(b => b.dayId === dayId);
+        const d = mode === 'edit' && bd ? bd.items.find(x => x.id === itemId) || {} : { cat: '', amount: 0 };
+        title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Budget';
+        body.innerHTML = `<div class="fg fg1"><div class="fld"><label>Kategori</label><input id="fcat" value="${d.cat || ''}"></div><div class="fld fhi"><label>Budget (Rp)</label><input type="number" id="fam" value="${d.amount || 0}" min="0"></div></div>`;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('mbg').classList.remove('open');
+      modalContext = null;
+    }
+
+    function saveModal() {
+      const { type, mode, args } = modalContext;
+      const getVal = (id) => document.getElementById(id)?.value || '';
+      const getNum = (id) => parseFloat(document.getElementById(id)?.value) || 0;
+      const getInt = (id) => parseInt(document.getElementById(id)?.value) || 1;
+
+      mutate(() => {
+        if (type === 'train') {
+          const obj = {
+            name: getVal('fn'), route: getVal('fr'), depDate: getVal('fdd'), depTime: getVal('fdt'),
+            arrDate: getVal('fad'), arrTime: getVal('fat'), price: getNum('fp'), pax: getInt('fpx'), status: getVal('fs')
+          };
+          if (mode === 'add') { obj.id = nextIds.tr++; S.trains.push(obj); }
+          else { const idx = S.trains.findIndex(x => x.id === args[0]); if (idx >= 0) { obj.id = args[0]; S.trains[idx] = obj; } }
+        } else if (type === 'hotel') {
+          const obj = {
+            name: getVal('fn'), city: getVal('fc'), checkIn: getVal('fci'), checkOut: getVal('fco'),
+            pricePerNight: getNum('fp'), status: getVal('fs')
+          };
+          if (mode === 'add') { obj.id = nextIds.ht++; S.hotels.push(obj); }
+          else { const idx = S.hotels.findIndex(x => x.id === args[0]); if (idx >= 0) { obj.id = args[0]; S.hotels[idx] = obj; } }
+        } else if (type === 'activity') {
+          const dayId = args[0];
+          const day = S.days.find(d => d.id === dayId);
+          if (day) {
+            const obj = { act: getVal('fa'), loc: getVal('fl'), base: getInt('fb'), dur: getInt('fd') };
+            if (mode === 'add') { obj.id = nextIds.act++; day.activities.push(obj); }
+            else { const idx = day.activities.findIndex(x => x.id === args[1]); if (idx >= 0) { obj.id = args[1]; day.activities[idx] = obj; } }
+          }
+        } else if (type === 'budget') {
+          const dayId = args[0];
+          let bd = S.budgetDays.find(b => b.dayId === dayId);
+          if (!bd) { bd = { dayId, items: [] }; S.budgetDays.push(bd); }
+          const obj = { cat: getVal('fcat'), amount: getNum('fam') };
+          if (mode === 'add') { obj.id = nextIds.bu++; bd.items.push(obj); }
+          else { const idx = bd.items.findIndex(x => x.id === args[1]); if (idx >= 0) { obj.id = args[1]; bd.items[idx] = obj; } }
+        }
+      });
+      closeModal();
+    }
+
+    // Render functions (simplified - similar to original but adapted)
+    function renderAll() {
+      renderMaster();
+      renderItinerary();
+      renderBudget();
+      renderAdjustment();
+    }
+
+    function renderMaster() {
+      const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
+      const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
+
+      let html = `<div class="ib">💡 Drag ☰ untuk reorder baris. Semua perubahan otomatis tersimpan ke Google Sheets.</div>`;
+
+      // Trains table
+      html += `<div class="sg"><div class="sbar bg-nv">🚆 Tiket Kereta <button class="btn b-add" onclick="openModal('train','add')">+ Tambah</button></div><div class="table-wrapper"><table><thead><tr>
+      <th class="th-tl" style="width:30px"></th><th class="th-tl">#</th><th class="th-tl">Nama KA</th><th class="th-tl">Rute</th>
+      <th class="th-tl">Berangkat</th><th class="th-tl">Tiba</th><th class="th-tl">Harga/Org</th>
+      <th class="th-tl">Pax</th><th class="th-tl">Subtotal</th><th class="th-tl">Status</th><th class="th-tl">Aksi</th>
+    </tr></thead><tbody>`;
+      S.trains.forEach((t, i) => {
+        html += `<tr draggable="true" data-type="train" data-id="${t.id}" ondragstart="onDragStart(event,'train','${t.id}')" ondragover="onDragOver(event)" ondrop="onDrop(event,'train')">
+        <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
+        <td style="font-weight:700">${t.name}</td><td>${t.route}</td>
+        <td style="white-space:nowrap">${fmtD(t.depDate)} ${t.depTime}</td>
+        <td style="white-space:nowrap">${fmtD(t.arrDate)} ${t.arrTime}</td>
+        <td class="mn iab">${rp(t.price)}</td>
+        <td style="text-align:center;font-weight:700">${t.pax}</td>
+        <td class="mn">${rp(t.price * t.pax)}</td>
+        <td><span class="${t.status === 'konfirmasi' ? 'bok' : 'best'}">${t.status}</span></td>
+        <td><span class="ce" onclick="openModal('train','edit',${t.id})">✏️</span> <span class="cd" onclick="deleteItem('train',${t.id})">🗑</span></td>
+      </tr>`;
+      });
+      html += `<tr class="tr-tot"><td colspan="8" style="text-align:right">Total Tiket</td><td class="mn">${rp(tkt)}</td><td colspan="2"></td></tr>`;
+      html += `</tbody></table></div></div>`;
+
+      // Hotels table
+      html += `<div class="sg"><div class="sbar bg-nv">🏨 Penginapan <button class="btn b-add" onclick="openModal('hotel','add')">+ Tambah</button></div><div class="table-wrapper"><table><thead><tr>
+      <th class="th-tl" style="width:30px"></th><th class="th-tl">#</th><th class="th-tl">Nama</th><th class="th-tl">Kota</th>
+      <th class="th-tl">Check-in/out</th><th class="th-tl">Malam</th><th class="th-tl">Harga/mlm</th>
+      <th class="th-tl">Subtotal</th><th class="th-tl">Status</th><th class="th-tl">Aksi</th>
+    </tr></thead><tbody>`;
+      S.hotels.forEach((h, i) => {
+        const n = nights(h.checkIn, h.checkOut);
+        html += `<tr draggable="true" data-type="hotel" data-id="${h.id}" ondragstart="onDragStart(event,'hotel','${h.id}')" ondragover="onDragOver(event)" ondrop="onDrop(event,'hotel')">
+        <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
+        <td style="font-weight:700">${h.name}</td><td>${h.city}</td>
+        <td style="white-space:nowrap">${fmtD(h.checkIn)} → ${fmtD(h.checkOut)}</td>
+        <td style="text-align:center">${n}</td>
+        <td class="mn iab">${rp(h.pricePerNight)}</td>
+        <td class="mn">${rp(h.pricePerNight * n)}</td>
+        <td><span class="${h.status === 'konfirmasi' ? 'bok' : 'best'}">${h.status}</span></td>
+        <td><span class="ce" onclick="openModal('hotel','edit',${h.id})">✏️</span> <span class="cd" onclick="deleteItem('hotel',${h.id})">🗑</span></td>
+      </tr>`;
+      });
+      html += `<tr class="tr-tot"><td colspan="7" style="text-align:right">Total Penginapan</td><td class="mn">${rp(thn)}</td><td colspan="2"></td></tr>
+      <tr class="tr-gnd"><td colspan="7" style="text-align:right">Grand Total Tiket + Penginapan</td><td class="mn">${rp(tkt + thn)}</td><td colspan="2"></td></tr>`;
+      html += `</tbody></table></div></div>`;
+
+      document.getElementById('p-master').innerHTML = html;
+    }
+
+    function renderItinerary() {
+      let html = `<div style="margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div style="font-size:13px;font-weight:700;color:var(--nv2)">📅 Hari-hari di Bandung</div>
+      <button class="btn b-add" onclick="addDay()">+ Tambah Hari</button>
+    </div>`;
+
+      S.days.forEach((day, idx) => {
+        html += `<div class="sg">
+        <div class="day-hdr">
+          <span class="drag-handle" style="color:rgba(255,255,255,.6)">☰</span>
+          <span class="d-title">📍 Hari ${idx + 1}</span>
+          <input type="text" value="${day.label}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).label=this.value})">
+          <span style="font-size:10px">Mulai:</span>
+          <input type="time" value="${day.startTime}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).startTime=this.value})">
+          <button class="btn b-add" onclick="openModal('activity','add',${day.id})">+ Aktivitas</button>
+          <button class="del-day" onclick="delDay(${day.id})">🗑 Hapus</button>
+        </div>
+        <div class="table-wrapper"><table><thead><tr>
+          <th class="th-or" style="width:30px"></th><th class="th-or">Waktu</th><th class="th-or">Aktivitas</th>
+          <th class="th-or">Lokasi</th><th class="th-or">Perj. (mnt)</th><th class="th-or">Durasi (mnt)</th><th class="th-or">Aksi</th>
+        </tr></thead><tbody>`;
+        let cur = t2m(day.startTime);
+        day.activities.forEach(a => {
+          html += `<tr draggable="true" data-aid="${a.id}" data-dayid="${day.id}" ondragstart="onDragStart(event,'act','${a.id}',${day.id})" ondragover="onDragOver(event)" ondrop="onDrop(event,'act',${day.id})">
+          <td><span class="drag-handle">☰</span></td>
+          <td style="font-weight:700;color:var(--tl);white-space:nowrap">${m2t(cur)}</td>
+          <td>${a.act}</td><td>${a.loc}</td>
+          <td style="text-align:center;background:var(--ab);font-weight:700">${a.base}</td>
+          <td style="text-align:center;background:var(--ab);font-weight:700">${a.dur}</td>
+          <td><span class="ce" onclick="openModal('activity','edit',${day.id},${a.id})">✏️</span> <span class="cd" onclick="deleteItem('act',${day.id},${a.id})">🗑</span></td>
+        </tr>`;
+          cur += a.dur + aMin(a.base);
+        });
+        html += `</tbody></table></div></div>`;
+      });
+      document.getElementById('p-itin').innerHTML = html;
+    }
+
+    function renderBudget() {
+      const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
+      const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
+      let grand = tkt + thn;
+
+      let html = `<div class="sg"><div class="sbar bg-pu2">🚆 Transportasi & Penginapan Antar Kota</div>
+      <div class="table-wrapper"><table><thead><tr><th class="th-pu">#</th><th class="th-pu">Kategori</th><th class="th-pu" style="text-align:right">Total</th></tr></thead><tbody>`;
+      [...S.trains.map(t => ['🚆 ' + t.name, t.price * t.pax]), ...S.hotels.map(h => ['🏨 ' + h.name, h.pricePerNight * nights(h.checkIn, h.checkOut)])].forEach((r, i) => {
+        html += `<tr><td>${i + 1}</td><td>${r[0]}</td><td class="mn" style="color:var(--gn)">${rp(r[1])}</td></tr>`;
+      });
+      html += `<tr class="tr-tot"><td colspan="2">Total</td><td class="mn">${rp(tkt + thn)}</td></tr></tbody></table></div></div>`;
+
+      S.days.forEach(day => {
+        let bd = S.budgetDays.find(x => x.dayId === day.id);
+        if (!bd) { bd = { dayId: day.id, items: [] }; S.budgetDays.push(bd); }
+        const b = bbm(day);
+        const dt = bd.items.reduce((a, x) => a + x.amount, 0) + b;
+        grand += dt;
+
+        html += `<div class="sg"><div class="sbar bg-or">📅 Budget ${day.label} <button class="btn b-add" onclick="openModal('budget','add',${day.id})">+ Item</button></div>
+        <div class="table-wrapper"><table><thead><tr><th class="th-gn">#</th><th class="th-gn">Kategori</th><th class="th-gn" style="text-align:right">Budget</th><th class="th-gn">Aksi</th></tr></thead><tbody>
+        <tr><td>0</td><td>⛽ BBM Motor</td><td class="mn">${rp(b)}</td><td>-</td></tr>`;
+        bd.items.forEach((it, i) => {
+          html += `<tr><td>${i + 1}</td><td>${it.cat}</td><td class="mn iab">${rp(it.amount)}</td>
+          <td><span class="ce" onclick="openModal('budget','edit',${day.id},${it.id})">✏️</span> <span class="cd" onclick="deleteItem('budget',${day.id},${it.id})">🗑</span></td></tr>`;
+        });
+        html += `<tr class="tr-tot"><td colspan="2">Total ${day.label}</td><td class="mn">${rp(dt)}</td><td></td></tr></tbody></table></div></div>`;
+      });
+
+      const sisa = S.budgetAwal - grand;
+      html += `<div class="sg"><div class="sbar bg-nv">📊 Summary Budget</div>
+      <div class="ac"><div class="acard"><div class="al">🎯 Budget Awal</div><input type="number" step="50000" value="${S.budgetAwal}" style="width:100%;text-align:center;font-size:14px;font-weight:700;border:1.5px solid var(--bd);border-radius:8px;padding:6px" onchange="mutate(()=>{S.budgetAwal=parseFloat(this.value)})"></div>
+      <div class="acard"><div class="al">🔥 Total Estimasi</div><div class="av" style="color:var(--or)">${rp(grand)}</div></div>
+      <div class="acard" style="border-color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}"><div class="al">${sisa >= 0 ? '✅' : '⚠️'} Sisa Dana</div><div class="av" style="color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(sisa)}</div></div></div></div>`;
+
+      document.getElementById('p-budget').innerHTML = html;
+    }
+
+    function renderAdjustment() {
+      let html = `<div class="sg"><div class="sbar bg-tl">⚙️ Parameter Perjalanan</div>
+      <div class="pr"><label>⏱ Faktor Waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${S.params.faktor}" onchange="mutate(()=>{S.params.faktor=parseFloat(this.value)})"><span class="ht">1.0=Normal · 1.3=Macet</span></div>
+      <div class="pr"><label>🏎 Kecepatan (km/j)</label><input type="number" step="1" value="${S.params.speed}" onchange="mutate(()=>{S.params.speed=parseFloat(this.value)})"><span class="ht">Rata-rata kecepatan motor</span></div>
+      <div class="pr"><label>⛽ Konsumsi (km/ltr)</label><input type="number" step="1" value="${S.params.consumption}" onchange="mutate(()=>{S.params.consumption=parseFloat(this.value)})"><span class="ht">Efisiensi motor</span></div>
+      <div class="pr"><label>💸 Harga BBM/ltr</label><input type="number" step="500" value="${S.params.fuelPrice}" onchange="mutate(()=>{S.params.fuelPrice=parseFloat(this.value)})"><span class="ht">Harga BBM saat ini</span></div>
+      ${S.days.map(d => `<div class="pr"><label>⏰ Jam Mulai — ${d.label}</label><input type="time" value="${d.startTime}" onchange="mutate(()=>{S.days.find(x=>x.id===${d.id}).startTime=this.value})"><span class="ht">Ubah jam mulai hari ini</span></div>`).join('')}
+    </div>
+    <button class="btn b-reset" style="margin-top:12px" onclick="if(confirm('Reset semua ke default?')) loadDefaultData()">🔄 Reset ke Default</button>`;
+      document.getElementById('p-adj').innerHTML = html;
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+      document.querySelectorAll('.pnl').forEach(p => p.classList.remove('on'));
+      const idx = { master: 0, itin: 1, budget: 2, adj: 3 }[tabName];
+      document.querySelectorAll('.tab')[idx].classList.add('on');
+      document.getElementById(`p-${tabName}`).classList.add('on');
+    }
+
+    // Make functions global
+    window.switchTab = switchTab;
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.saveModal = saveModal;
+    window.deleteItem = deleteItem;
+    window.addDay = addDay;
+    window.delDay = delDay;
+    window.onDragStart = onDragStart;
+    window.onDragOver = onDragOver;
+    window.onDrop = onDrop;
+    window.mutate = mutate;
+    window.loadDefaultData = loadDefaultData;
+
+    // Initialize
+    loadFromSheets();
+  </script>
+</body>
+
+</html>
