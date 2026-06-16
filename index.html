@@ -37,13 +37,11 @@
       --ib: #1D4ED8;
     }
 
-    /* Mobile First */
     .container {
       max-width: 100%;
       margin: 0 auto;
     }
 
-    /* Header */
     .hdr {
       background: #1E293B;
       color: #fff;
@@ -95,7 +93,6 @@
       background: var(--pu);
     }
 
-    /* Tabs - Mobile Scroll */
     .tabs {
       display: flex;
       background: #fff;
@@ -130,7 +127,6 @@
       background: var(--alt);
     }
 
-    /* Panels */
     .pnl {
       display: none;
       padding: 12px;
@@ -140,11 +136,10 @@
       display: block;
     }
 
-    /* Status Bar */
     .status-bar {
       padding: 10px 12px;
       border-radius: 8px;
-      margin-bottom: 12px;
+      margin: 8px 12px;
       font-size: 12px;
       font-weight: 500;
       display: flex;
@@ -178,7 +173,6 @@
       border-left: 3px solid #F59E0B;
     }
 
-    /* Buttons */
     .btn {
       padding: 8px 14px;
       border: none;
@@ -225,7 +219,6 @@
       border: 1px solid #FCA5A5;
     }
 
-    /* Tables - Mobile Responsive */
     .table-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -237,14 +230,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
-      min-width: 600px;
-    }
-
-    /* Mobile card view for small screens */
-    @media (max-width: 640px) {
-      table {
-        min-width: 500px;
-      }
+      min-width: 560px;
     }
 
     th {
@@ -306,10 +292,27 @@
       font-weight: 700;
     }
 
-    /* Action buttons */
+    .bok {
+      background: #DCFCE7;
+      color: #166534;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .best {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
     .ce,
     .cd {
-      padding: 4px 10px;
+      padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 11px;
@@ -335,7 +338,6 @@
       opacity: 0.7;
     }
 
-    /* Drag handle */
     .drag-handle {
       cursor: grab;
       color: #94A3B8;
@@ -348,7 +350,6 @@
       cursor: grabbing;
     }
 
-    /* Modal */
     .mbg {
       display: none;
       position: fixed;
@@ -386,7 +387,6 @@
       padding-bottom: 8px;
     }
 
-    /* Form grid */
     .fg {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -441,7 +441,6 @@
       border-top: 1px solid var(--bd);
     }
 
-    /* Cards for summary */
     .ac {
       display: flex;
       gap: 10px;
@@ -471,12 +470,11 @@
       font-weight: 700;
     }
 
-    /* Parameter rows */
     .pr {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 150px 1fr;
       gap: 10px;
-      align-items: center;
+      align-items: start;
       padding: 10px;
       background: var(--alt);
       border-radius: 8px;
@@ -519,7 +517,6 @@
       }
     }
 
-    /* Day header */
     .day-hdr {
       display: flex;
       align-items: center;
@@ -564,7 +561,6 @@
       font-weight: 700;
     }
 
-    /* Info box */
     .ib {
       background: #EFF6FF;
       border-left: 3px solid var(--tl);
@@ -575,7 +571,6 @@
       margin-bottom: 12px;
     }
 
-    /* Section header */
     .sbar {
       padding: 10px 12px;
       border-radius: 8px;
@@ -602,11 +597,10 @@
       background: var(--pu);
     }
 
-    /* Loading spinner */
     .spinner {
       display: inline-block;
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       border: 2px solid rgba(0, 0, 0, 0.1);
       border-top-color: var(--or);
       border-radius: 50%;
@@ -619,7 +613,6 @@
       }
     }
 
-    /* Drag states */
     .drag-over td {
       background: #FEF3C7 !important;
       border-top: 2px solid var(--or);
@@ -638,7 +631,7 @@
       <span style="font-size:20px">🗺️</span>
       <div style="flex:1">
         <h1>Travel Planner Pro</h1>
-        <div class="hd-sub">Bandung Weekend Escape · Live Sync ke Sheets</div>
+        <div class="hd-sub">Bandung Weekend Escape · Live Sync ke Sheets · WIB (UTC+7)</div>
       </div>
       <span class="badge bg-or">CRUD</span>
       <span class="badge bg-tl">DRAG</span>
@@ -653,7 +646,7 @@
     </div>
 
     <div id="statusBar" class="status-bar loading">
-      <span>🔄 Memuat data dari Google Sheets...</span>
+      <span><span class="spinner"></span> Memuat data dari Google Sheets...</span>
     </div>
 
     <div id="p-master" class="pnl on"></div>
@@ -668,132 +661,301 @@
       <div id="mb"></div>
       <div class="mact">
         <button class="btn b-cc" onclick="closeModal()">Batal</button>
-        <button class="btn b-sv" onclick="saveModal()">Simpan</button>
+        <button class="btn b-sv" onclick="saveModal()">💾 Simpan</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Google Apps Script URL (GANTI DENGAN URL DEPLOY ANDA)
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzwBqHsm10ZufbBMHzNOqUreo8jpfCBjK28ZWQ9Pqsl3_nFeQAx3Ns0TNU1Z4maLQIP/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzfY0csFnk1wk-tekV3B8feZVw2Tm0fxeeNuLpcFiWtHhaB_kbT_7OQ06swJmGNykOq/exec';
+
+    // ─── WIB (UTC+7) helpers ────────────────────────────────────────────────
+
+    /**
+     * Parse sebuah nilai tanggal dari Sheets menjadi string "YYYY-MM-DD" di zona WIB.
+     * Sheets bisa mengirim: "2026-07-01", "7/1/2026", atau angka serial Excel.
+     */
+    function parseSheetDate(val) {
+      if (!val && val !== 0) return '';
+
+      // Angka serial Excel/Sheets (hari sejak 30 Des 1899)
+      if (typeof val === 'number') {
+        // Koreksi bug Lotus 1900 (Sheets menghitung 29 Feb 1900 yg tidak ada)
+        const serial = val > 59 ? val - 1 : val;
+        const epoch = new Date(Date.UTC(1900, 0, 1));
+        epoch.setUTCDate(epoch.getUTCDate() + serial - 1);
+        return epochToWIBDateStr(epoch.getTime());
+      }
+
+      const s = String(val).trim();
+      if (!s) return '';
+
+      // Sudah format ISO: "2026-07-01" atau "2026-07-01T..."
+      if (/^\d{4}-\d{2}-\d{2}/.test(s)) {
+        // Ambil bagian tanggal saja, tidak perlu konversi zona (sudah benar)
+        return s.substring(0, 10);
+      }
+
+      // Format M/D/YYYY atau D/M/YYYY (Sheets locale Indonesia = D/M/YYYY)
+      const parts = s.split('/');
+      if (parts.length === 3) {
+        // Coba deteksi apakah M/D/YYYY atau D/M/YYYY
+        // Sheets Indonesia biasanya D/M/YYYY
+        let d = parseInt(parts[0]), m = parseInt(parts[1]), y = parseInt(parts[2]);
+        // Jika bagian pertama > 12, pasti hari
+        // Jika bagian kedua > 12, berarti M/D/YYYY — tukar
+        if (m > 12) { [d, m] = [m, d]; }
+        return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      }
+
+      // Fallback: coba parse lalu convert ke WIB
+      const ms = Date.parse(s);
+      if (!isNaN(ms)) return epochToWIBDateStr(ms);
+
+      return s.substring(0, 10);
+    }
+
+    /**
+     * Parse nilai waktu dari Sheets menjadi string "HH:MM" di WIB.
+     * Sheets bisa kirim: "14:39", "14:39:00", angka desimal (fraksi hari), atau ISO string.
+     */
+    function parseSheetTime(val) {
+      if (!val && val !== 0) return '';
+
+      // Angka desimal fraksi hari (misal 0.6104... = 14:39)
+      if (typeof val === 'number') {
+        if (val < 1) {
+          // Fraksi hari murni
+          const totalMin = Math.round(val * 24 * 60);
+          const h = Math.floor(totalMin / 60) % 24;
+          const m = totalMin % 60;
+          return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+        }
+        // Angka serial >= 1: ada komponen tanggal + waktu, ambil bagian waktu saja
+        const frac = val - Math.floor(val);
+        const totalMin = Math.round(frac * 24 * 60);
+        const h = Math.floor(totalMin / 60) % 24;
+        const m = totalMin % 60;
+        return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+      }
+
+      const s = String(val).trim();
+      if (!s) return '';
+
+      // Format HH:MM atau HH:MM:SS
+      const tmMatch = s.match(/(\d{1,2}):(\d{2})(?::\d{2})?/);
+      if (tmMatch) {
+        return String(parseInt(tmMatch[1])).padStart(2, '0') + ':' + tmMatch[2];
+      }
+
+      // ISO datetime string — convert ke WIB
+      const ms = Date.parse(s);
+      if (!isNaN(ms)) {
+        return epochToWIBTimeStr(ms);
+      }
+
+      return s.substring(0, 5);
+    }
+
+    /** Konversi epoch ms ke "YYYY-MM-DD" di WIB (UTC+7) */
+    function epochToWIBDateStr(ms) {
+      const wib = new Date(ms + 7 * 3600 * 1000);
+      const y = wib.getUTCFullYear();
+      const m = String(wib.getUTCMonth() + 1).padStart(2, '0');
+      const d = String(wib.getUTCDate()).padStart(2, '0');
+      return y + '-' + m + '-' + d;
+    }
+
+    /** Konversi epoch ms ke "HH:MM" di WIB (UTC+7) */
+    function epochToWIBTimeStr(ms) {
+      const wib = new Date(ms + 7 * 3600 * 1000);
+      return String(wib.getUTCHours()).padStart(2, '0') + ':' + String(wib.getUTCMinutes()).padStart(2, '0');
+    }
+
+    /** Tampilan tanggal: "03 Jul 2026" */
+    const BULAN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+    function fmtD(d) {
+      if (!d) return '-';
+      const [y, m, dd] = String(d).substring(0, 10).split('-');
+      return dd + ' ' + BULAN[parseInt(m) - 1] + ' ' + y;
+    }
+
+    /** Timestamp WIB sekarang untuk status bar */
+    function nowWIB() {
+      return new Date().toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    // ─── Normalise data dari Sheets ─────────────────────────────────────────
+
+    function normalizeTrain(t) {
+      return {
+        id: Number(t.id),
+        name: t.name || '',
+        route: t.route || '',
+        depDate: parseSheetDate(t.depDate),
+        depTime: parseSheetTime(t.depTime),
+        arrDate: parseSheetDate(t.arrDate),
+        arrTime: parseSheetTime(t.arrTime),
+        price: Number(t.price) || 0,
+        pax: Number(t.pax) || 1,
+        status: t.status || 'estimasi',
+      };
+    }
+
+    function normalizeHotel(h) {
+      return {
+        id: Number(h.id),
+        name: h.name || '',
+        city: h.city || '',
+        checkIn: parseSheetDate(h.checkIn),
+        checkOut: parseSheetDate(h.checkOut),
+        pricePerNight: Number(h.pricePerNight) || 0,
+        status: h.status || 'estimasi',
+      };
+    }
+
+    function normalizeActivity(a) {
+      return {
+        id: Number(a.id),
+        act: a.act || '',
+        loc: a.loc || '',
+        base: Number(a.base) || 0,
+        dur: Number(a.dur) || 0,
+      };
+    }
+
+    function normalizeDay(d) {
+      return {
+        id: Number(d.id),
+        label: d.label || 'Hari',
+        startTime: parseSheetTime(d.startTime) || '08:00',
+        activities: (d.activities || []).map(normalizeActivity),
+      };
+    }
+
+    // ─── App state ──────────────────────────────────────────────────────────
 
     let S = {
-      trains: [],
-      hotels: [],
+      trains: [], hotels: [],
       params: { faktor: 1.0, speed: 30, consumption: 35, fuelPrice: 10000 },
-      days: [],
-      budgetDays: [],
-      budgetAwal: 2500000
+      days: [], budgetDays: [], budgetAwal: 2500000
     };
 
     let nextIds = { tr: 1, ht: 1, day: 1, act: 1, bu: 1 };
     let modalContext = null;
     let dragSrc = null;
     let isLoading = false;
+    let saveDebounce = null;
 
-    // Helper functions
-    const rp = (n) => 'Rp ' + Math.round(n).toLocaleString('id-ID');
-    const fmtD = (d) => {
-      if (!d) return '-';
-      const [y, m, dd] = d.split('-');
-      const mn = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
-      return dd + ' ' + mn[parseInt(m) - 1] + ' ' + y;
-    };
+    // ─── Helpers ────────────────────────────────────────────────────────────
+
+    const rp = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
     const nights = (ci, co) => Math.max(0, Math.round((new Date(co) - new Date(ci)) / 86400000));
-    const t2m = (t) => { if (!t) return 0; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
-    const m2t = (m) => { const h = Math.floor(m / 60) % 24, mm = m % 60; return String(h).padStart(2, '0') + ':' + String(mm).padStart(2, '0'); };
-    const aMin = (b) => Math.round(b * (S.params.faktor || 1));
-    const bbm = (day) => {
+    const t2m = t => { if (!t) return 0; const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+    const m2t = m => { const h = Math.floor(m / 60) % 24, mm = m % 60; return String(h).padStart(2, '0') + ':' + String(mm).padStart(2, '0'); };
+    const aMin = b => Math.round(b * (S.params.faktor || 1));
+    const bbm = day => {
       const tot = day.activities.reduce((a, x) => a + aMin(x.base), 0);
       return Math.round(tot / 60 * S.params.speed / S.params.consumption * S.params.fuelPrice);
     };
+    const durStr = (dd, dt, ad, at) => {
+      if (!dd || !dt || !ad || !at) return '-';
+      const d = (new Date(ad + 'T' + at)) - (new Date(dd + 'T' + dt));
+      if (d < 0) return '-';
+      const m = d / 60000;
+      return Math.floor(m / 60) + 'j ' + Math.round(m % 60) + 'm';
+    };
+
+    // ─── Status bar ─────────────────────────────────────────────────────────
 
     function showStatus(message, type = 'loading') {
       const bar = document.getElementById('statusBar');
-      const icons = { loading: '🔄', success: '✅', error: '❌', synced: '☁️' };
-      bar.innerHTML = `<span>${icons[type] || 'ℹ️'} ${message}</span>`;
+      const icons = { loading: '<span class="spinner"></span>', success: '✅', error: '❌', synced: '☁️' };
+      bar.innerHTML = `<span style="display:flex;align-items:center;gap:8px">${icons[type] || 'ℹ️'} ${message}</span><span style="font-size:10px;color:#64748B">WIB ${nowWIB()}</span>`;
       bar.className = `status-bar ${type}`;
       if (type !== 'loading') {
         setTimeout(() => {
-          if (document.getElementById('statusBar').className === `status-bar ${type}`) {
-            bar.className = 'status-bar';
-            bar.innerHTML = '<span>✅ Data siap</span>';
+          if (bar.className === `status-bar ${type}`) {
+            bar.innerHTML = `<span>✅ Data siap</span><span style="font-size:10px;color:#64748B">WIB ${nowWIB()}</span>`;
+            bar.className = 'status-bar success';
           }
-        }, 3000);
+        }, 4000);
       }
     }
 
-    // Load from Google Sheets
+    // ─── Load dari Sheets ───────────────────────────────────────────────────
+
     async function loadFromSheets() {
       if (isLoading) return;
       isLoading = true;
       showStatus('Mengambil data dari Google Sheets...', 'loading');
-
       try {
-        const response = await fetch(`${GAS_URL}?action=load&t=${Date.now()}`);
-        const result = await response.json();
+        const res = await fetch(`${GAS_URL}?action=load&t=${Date.now()}`);
+        const result = await res.json();
 
         if (result.status === 'success' && result.data) {
           const d = result.data;
           if (d.transports) {
-            S.trains = d.transports.trains || [];
-            S.hotels = d.transports.hotels || [];
+            S.trains = (d.transports.trains || []).map(normalizeTrain);
+            S.hotels = (d.transports.hotels || []).map(normalizeHotel);
           }
-          if (d.itineraries && d.itineraries.days) S.days = d.itineraries.days;
+          if (d.itineraries && d.itineraries.days) {
+            S.days = d.itineraries.days.map(normalizeDay);
+          }
           if (d.budgets) {
             S.budgetDays = d.budgets.days || [];
             S.budgetAwal = d.budgets.budgetAwal || 2500000;
           }
-          if (d.tripInfo && d.tripInfo.params) S.params = d.tripInfo.params;
-
-          // Update nextIds
-          S.trains.forEach(t => { if (t.id >= nextIds.tr) nextIds.tr = t.id + 1; });
-          S.hotels.forEach(h => { if (h.id >= nextIds.ht) nextIds.ht = h.id + 1; });
-          S.days.forEach(d => {
-            if (d.id >= nextIds.day) nextIds.day = d.id + 1;
-            d.activities.forEach(a => { if (a.id >= nextIds.act) nextIds.act = a.id + 1; });
-          });
-          S.budgetDays.forEach(bd => {
-            bd.items.forEach(i => { if (i.id >= nextIds.bu) nextIds.bu = i.id + 1; });
-          });
-
+          if (d.tripInfo && d.tripInfo.params) {
+            S.params = d.tripInfo.params;
+          }
+          rebuildNextIds();
           showStatus('Data berhasil dimuat dari Google Sheets!', 'success');
           renderAll();
         } else {
-          showStatus('Gagal memuat data: ' + (result.message || 'Unknown error'), 'error');
+          showStatus('Gagal memuat: ' + (result.message || 'Unknown error') + ' — menampilkan data default.', 'error');
           loadDefaultData();
         }
       } catch (err) {
         console.error('Load error:', err);
-        showStatus('Gagal konek ke Google Sheets. Memuat data default...', 'error');
+        showStatus('Gagal konek ke Google Sheets — menampilkan data default.', 'error');
         loadDefaultData();
       }
       isLoading = false;
     }
 
-    // Save to Google Sheets
+    function rebuildNextIds() {
+      S.trains.forEach(t => { if (t.id >= nextIds.tr) nextIds.tr = t.id + 1; });
+      S.hotels.forEach(h => { if (h.id >= nextIds.ht) nextIds.ht = h.id + 1; });
+      S.days.forEach(d => {
+        if (d.id >= nextIds.day) nextIds.day = d.id + 1;
+        d.activities.forEach(a => { if (a.id >= nextIds.act) nextIds.act = a.id + 1; });
+      });
+      S.budgetDays.forEach(bd => {
+        (bd.items || []).forEach(i => { if (i.id >= nextIds.bu) nextIds.bu = i.id + 1; });
+      });
+    }
+
+    // ─── Save ke Sheets ─────────────────────────────────────────────────────
+
     async function saveToSheets() {
       showStatus('Menyimpan ke Google Sheets...', 'loading');
-
       const payload = {
         transports: { trains: S.trains, hotels: S.hotels },
         itineraries: { days: S.days },
         budgets: { days: S.budgetDays, budgetAwal: S.budgetAwal },
         tripInfo: { params: S.params }
       };
-
-      const formData = new FormData();
-      formData.append('action', 'save');
-      formData.append('data', JSON.stringify(payload));
-
+      const fd = new FormData();
+      fd.append('action', 'save');
+      fd.append('data', JSON.stringify(payload));
       try {
-        const response = await fetch(GAS_URL, { method: 'POST', body: formData });
-        const result = await response.json();
-
+        const res = await fetch(GAS_URL, { method: 'POST', body: fd });
+        const result = await res.json();
         if (result.status === 'success') {
-          showStatus('Data berhasil disimpan ke Google Sheets!', 'success');
+          showStatus('Tersimpan ke Google Sheets!', 'success');
         } else {
-          showStatus('Gagal menyimpan: ' + (result.message || 'Unknown error'), 'error');
+          showStatus('Gagal menyimpan: ' + (result.message || ''), 'error');
         }
       } catch (err) {
         console.error('Save error:', err);
@@ -801,7 +963,8 @@
       }
     }
 
-    // Load default data
+    // ─── Default data ───────────────────────────────────────────────────────
+
     function loadDefaultData() {
       S = {
         trains: [
@@ -821,13 +984,27 @@
               { id: 2, act: "Beli Pukis Lumer", loc: "Leuwi Panjang", base: 20, dur: 15 },
               { id: 3, act: "Titip Koper", loc: "Dreamstay", base: 15, dur: 10 },
               { id: 4, act: "Ke Al Jabbar", loc: "Bandung Timur", base: 25, dur: 45 },
+              { id: 5, act: "Main Sepeda & Sunset", loc: "Summarecon", base: 15, dur: 105 },
+              { id: 6, act: "Makan Malam", loc: "Summarecon", base: 0, dur: 45 },
+              { id: 7, act: "Kembali ke Dreamstay", loc: "Dreamstay", base: 25, dur: 0 },
             ]
           },
           {
             id: 2, label: "Sabtu, 04 Jul 2026", startTime: "03:00", activities: [
-              { id: 1, act: "Bangun & Beli Bekal", loc: "Dreamstay", base: 5, dur: 15 },
+              { id: 1, act: "Bangun & Beli Bekal", loc: "Indomaret", base: 5, dur: 15 },
               { id: 2, act: "Berangkat ke Cukul", loc: "Pangalengan", base: 90, dur: 0 },
               { id: 3, act: "Sunrise Point", loc: "Sunrise Point Cukul", base: 0, dur: 120 },
+              { id: 4, act: "Sarapan", loc: "Cukul", base: 0, dur: 90 },
+              { id: 5, act: "Picnic & Grill Lembang", loc: "Kebon Pinus Lembang", base: 120, dur: 300 },
+              { id: 6, act: "Makan Malam & Istirahat", loc: "Dreamstay", base: 60, dur: 60 },
+            ]
+          },
+          {
+            id: 3, label: "Minggu, 05 Jul 2026", startTime: "07:00", activities: [
+              { id: 1, act: "Sarapan & Beli Tiramisusu", loc: "Chocomory", base: 30, dur: 60 },
+              { id: 2, act: "Ke Rumah Aspol", loc: "Bandung", base: 20, dur: 160 },
+              { id: 3, act: "Check-out & Kembalikan Motor", loc: "Dreamstay → Stasiun", base: 20, dur: 40 },
+              { id: 4, act: "Tunggu Kereta Malabar", loc: "Stasiun Bandung", base: 0, dur: 0 },
             ]
           },
         ],
@@ -835,16 +1012,21 @@
         budgetAwal: 2500000,
       };
       S.budgetDays = S.days.map(d => ({ dayId: d.id, items: [] }));
+      nextIds = { tr: 10, ht: 10, day: 10, act: 100, bu: 100 };
       renderAll();
       saveToSheets();
     }
 
-    // CRUD Operations with auto-save
+    // ─── Mutate helper ──────────────────────────────────────────────────────
+
     async function mutate(callback) {
       callback();
       renderAll();
-      await saveToSheets();
+      clearTimeout(saveDebounce);
+      saveDebounce = setTimeout(() => saveToSheets(), 600);
     }
+
+    // ─── Day ops ────────────────────────────────────────────────────────────
 
     function addDay() {
       mutate(() => {
@@ -878,7 +1060,8 @@
       });
     }
 
-    // Drag & Drop
+    // ─── Drag & Drop ────────────────────────────────────────────────────────
+
     function onDragStart(e, type, id, dayId) {
       dragSrc = { type, id: String(id), dayId };
       e.dataTransfer.effectAllowed = 'move';
@@ -902,38 +1085,28 @@
 
       mutate(() => {
         if (type === 'train' && dragSrc.type === 'train') {
-          const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id);
-          const fi = S.trains.findIndex(x => x.id === fromId);
-          const ti = S.trains.findIndex(x => x.id === toId);
-          if (fi >= 0 && ti >= 0 && fi !== ti) {
-            const [item] = S.trains.splice(fi, 1);
-            S.trains.splice(ti, 0, item);
-          }
+          reorder(S.trains, parseInt(dragSrc.id), parseInt(target.dataset.id));
         } else if (type === 'hotel' && dragSrc.type === 'hotel') {
-          const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.id);
-          const fi = S.hotels.findIndex(x => x.id === fromId);
-          const ti = S.hotels.findIndex(x => x.id === toId);
-          if (fi >= 0 && ti >= 0 && fi !== ti) {
-            const [item] = S.hotels.splice(fi, 1);
-            S.hotels.splice(ti, 0, item);
-          }
+          reorder(S.hotels, parseInt(dragSrc.id), parseInt(target.dataset.id));
         } else if (type === 'act' && dragSrc.type === 'act') {
           const day = S.days.find(d => d.id === dayId);
-          if (day) {
-            const fromId = parseInt(dragSrc.id), toId = parseInt(target.dataset.aid);
-            const fi = day.activities.findIndex(x => x.id === fromId);
-            const ti = day.activities.findIndex(x => x.id === toId);
-            if (fi >= 0 && ti >= 0 && fi !== ti) {
-              const [item] = day.activities.splice(fi, 1);
-              day.activities.splice(ti, 0, item);
-            }
-          }
+          if (day) reorder(day.activities, parseInt(dragSrc.id), parseInt(target.dataset.aid));
         }
       });
       dragSrc = null;
     }
 
-    // Modal handling
+    function reorder(arr, fromId, toId) {
+      const fi = arr.findIndex(x => x.id === fromId);
+      const ti = arr.findIndex(x => x.id === toId);
+      if (fi >= 0 && ti >= 0 && fi !== ti) {
+        const [item] = arr.splice(fi, 1);
+        arr.splice(ti, 0, item);
+      }
+    }
+
+    // ─── Modal ──────────────────────────────────────────────────────────────
+
     function openModal(type, mode, ...args) {
       modalContext = { type, mode, args };
       document.getElementById('mbg').classList.add('open');
@@ -943,23 +1116,61 @@
       if (type === 'train') {
         const d = mode === 'edit' ? S.trains.find(x => x.id === args[0]) : { name: '', route: '', depDate: '', depTime: '', arrDate: '', arrTime: '', price: 0, pax: 1, status: 'estimasi' };
         title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Tiket Kereta';
-        body.innerHTML = `<div class="fg"><div class="fld"><label>Nama Kereta</label><input id="fn" value="${d.name || ''}"></div><div class="fld"><label>Rute</label><input id="fr" value="${d.route || ''}"></div><div class="fld"><label>Tgl Berangkat</label><input type="date" id="fdd" value="${d.depDate || ''}"></div><div class="fld"><label>Jam Berangkat</label><input type="time" id="fdt" value="${d.depTime || ''}"></div><div class="fld"><label>Tgl Tiba</label><input type="date" id="fad" value="${d.arrDate || ''}"></div><div class="fld"><label>Jam Tiba</label><input type="time" id="fat" value="${d.arrTime || ''}"></div><div class="fld fhi"><label>Harga/Orang (Rp)</label><input type="number" id="fp" value="${d.price || 0}"></div><div class="fld fhi"><label>Jumlah Penumpang</label><input type="number" id="fpx" value="${d.pax || 1}" min="1"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
+        body.innerHTML = `
+          <div class="ib" style="font-size:10px">⏰ Masukkan jam dalam WIB (misal 14:39 = jam 14.39 WIB)</div>
+          <div class="fg">
+            <div class="fld"><label>Nama Kereta</label><input id="fn" value="${d.name || ''}"></div>
+            <div class="fld"><label>Rute</label><input id="fr" value="${d.route || ''}"></div>
+            <div class="fld"><label>Tgl Berangkat</label><input type="date" id="fdd" value="${d.depDate || ''}"></div>
+            <div class="fld"><label>Jam Berangkat (WIB)</label><input type="time" id="fdt" value="${d.depTime || ''}"></div>
+            <div class="fld"><label>Tgl Tiba</label><input type="date" id="fad" value="${d.arrDate || ''}"></div>
+            <div class="fld"><label>Jam Tiba (WIB)</label><input type="time" id="fat" value="${d.arrTime || ''}"></div>
+            <div class="fld fhi"><label>Harga/Orang (Rp)</label><input type="number" id="fp" value="${d.price || 0}"></div>
+            <div class="fld fhi"><label>Jumlah Penumpang</label><input type="number" id="fpx" value="${d.pax || 1}" min="1"></div>
+            <div class="fld"><label>Status</label><select id="fs">
+              <option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option>
+              <option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option>
+            </select></div>
+          </div>`;
       } else if (type === 'hotel') {
         const d = mode === 'edit' ? S.hotels.find(x => x.id === args[0]) : { name: '', city: '', checkIn: '', checkOut: '', pricePerNight: 0, status: 'estimasi' };
         title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Penginapan';
-        body.innerHTML = `<div class="fg"><div class="fld"><label>Nama Penginapan</label><input id="fn" value="${d.name || ''}"></div><div class="fld"><label>Kota</label><input id="fc" value="${d.city || ''}"></div><div class="fld"><label>Tgl Check-in</label><input type="date" id="fci" value="${d.checkIn || ''}"></div><div class="fld"><label>Tgl Check-out</label><input type="date" id="fco" value="${d.checkOut || ''}"></div><div class="fld fhi"><label>Harga/Malam (Rp)</label><input type="number" id="fp" value="${d.pricePerNight || 0}"></div><div class="fld"><label>Status</label><select id="fs"><option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option><option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option></select></div></div>`;
+        body.innerHTML = `
+          <div class="fg">
+            <div class="fld"><label>Nama Penginapan</label><input id="fn" value="${d.name || ''}"></div>
+            <div class="fld"><label>Kota</label><input id="fc" value="${d.city || ''}"></div>
+            <div class="fld"><label>Tgl Check-in</label><input type="date" id="fci" value="${d.checkIn || ''}"></div>
+            <div class="fld"><label>Tgl Check-out</label><input type="date" id="fco" value="${d.checkOut || ''}"></div>
+            <div class="fld fhi"><label>Harga/Malam (Rp)</label><input type="number" id="fp" value="${d.pricePerNight || 0}"></div>
+            <div class="fld"><label>Status</label><select id="fs">
+              <option value="estimasi"${d.status === 'estimasi' ? ' selected' : ''}>Estimasi</option>
+              <option value="konfirmasi"${d.status === 'konfirmasi' ? ' selected' : ''}>Konfirmasi</option>
+            </select></div>
+          </div>`;
       } else if (type === 'activity') {
         const dayId = args[0], actId = args[1];
         const day = S.days.find(d => d.id === dayId);
         const d = mode === 'edit' && day ? day.activities.find(x => x.id === actId) || {} : { act: '', loc: '', base: 0, dur: 30 };
         title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Aktivitas';
-        body.innerHTML = `<div class="fg fg1"><div class="fld"><label>Nama Aktivitas</label><input id="fa" value="${d.act || ''}"></div><div class="fld"><label>Lokasi</label><input id="fl" value="${d.loc || ''}"></div></div><div class="fg"><div class="fld fhi"><label>Perjalanan Dasar (menit)</label><input type="number" id="fb" value="${d.base || 0}" min="0"></div><div class="fld fhi"><label>Durasi Aktivitas (menit)</label><input type="number" id="fd" value="${d.dur || 30}" min="0"></div></div>`;
+        body.innerHTML = `
+          <div class="fg fg1">
+            <div class="fld"><label>Nama Aktivitas</label><input id="fa" value="${d.act || ''}"></div>
+            <div class="fld"><label>Lokasi</label><input id="fl" value="${d.loc || ''}"></div>
+          </div>
+          <div class="fg">
+            <div class="fld fhi"><label>Perjalanan Dasar (menit)</label><input type="number" id="fb" value="${d.base || 0}" min="0"></div>
+            <div class="fld fhi"><label>Durasi Aktivitas (menit)</label><input type="number" id="fd" value="${d.dur || 30}" min="0"></div>
+          </div>`;
       } else if (type === 'budget') {
         const dayId = args[0], itemId = args[1];
         const bd = S.budgetDays.find(b => b.dayId === dayId);
         const d = mode === 'edit' && bd ? bd.items.find(x => x.id === itemId) || {} : { cat: '', amount: 0 };
         title.textContent = (mode === 'add' ? 'Tambah' : 'Edit') + ' Budget';
-        body.innerHTML = `<div class="fg fg1"><div class="fld"><label>Kategori</label><input id="fcat" value="${d.cat || ''}"></div><div class="fld fhi"><label>Budget (Rp)</label><input type="number" id="fam" value="${d.amount || 0}" min="0"></div></div>`;
+        body.innerHTML = `
+          <div class="fg fg1">
+            <div class="fld"><label>Kategori</label><input id="fcat" value="${d.cat || ''}"></div>
+            <div class="fld fhi"><label>Budget (Rp)</label><input type="number" id="fam" value="${d.amount || 0}" min="0"></div>
+          </div>`;
       }
     }
 
@@ -970,139 +1181,167 @@
 
     function saveModal() {
       const { type, mode, args } = modalContext;
-      const getVal = (id) => document.getElementById(id)?.value || '';
-      const getNum = (id) => parseFloat(document.getElementById(id)?.value) || 0;
-      const getInt = (id) => parseInt(document.getElementById(id)?.value) || 1;
+      const gv = id => document.getElementById(id)?.value || '';
+      const gn = id => parseFloat(document.getElementById(id)?.value) || 0;
+      const gi = id => parseInt(document.getElementById(id)?.value) || 1;
 
       mutate(() => {
         if (type === 'train') {
-          const obj = {
-            name: getVal('fn'), route: getVal('fr'), depDate: getVal('fdd'), depTime: getVal('fdt'),
-            arrDate: getVal('fad'), arrTime: getVal('fat'), price: getNum('fp'), pax: getInt('fpx'), status: getVal('fs')
-          };
+          const obj = { name: gv('fn'), route: gv('fr'), depDate: gv('fdd'), depTime: gv('fdt'), arrDate: gv('fad'), arrTime: gv('fat'), price: gn('fp'), pax: gi('fpx'), status: gv('fs') };
           if (mode === 'add') { obj.id = nextIds.tr++; S.trains.push(obj); }
-          else { const idx = S.trains.findIndex(x => x.id === args[0]); if (idx >= 0) { obj.id = args[0]; S.trains[idx] = obj; } }
+          else { const i = S.trains.findIndex(x => x.id === args[0]); if (i >= 0) { obj.id = args[0]; S.trains[i] = obj; } }
         } else if (type === 'hotel') {
-          const obj = {
-            name: getVal('fn'), city: getVal('fc'), checkIn: getVal('fci'), checkOut: getVal('fco'),
-            pricePerNight: getNum('fp'), status: getVal('fs')
-          };
+          const obj = { name: gv('fn'), city: gv('fc'), checkIn: gv('fci'), checkOut: gv('fco'), pricePerNight: gn('fp'), status: gv('fs') };
           if (mode === 'add') { obj.id = nextIds.ht++; S.hotels.push(obj); }
-          else { const idx = S.hotels.findIndex(x => x.id === args[0]); if (idx >= 0) { obj.id = args[0]; S.hotels[idx] = obj; } }
+          else { const i = S.hotels.findIndex(x => x.id === args[0]); if (i >= 0) { obj.id = args[0]; S.hotels[i] = obj; } }
         } else if (type === 'activity') {
-          const dayId = args[0];
-          const day = S.days.find(d => d.id === dayId);
+          const dayId = args[0]; const day = S.days.find(d => d.id === dayId);
           if (day) {
-            const obj = { act: getVal('fa'), loc: getVal('fl'), base: getInt('fb'), dur: getInt('fd') };
+            const obj = { act: gv('fa'), loc: gv('fl'), base: gi('fb'), dur: gi('fd') };
             if (mode === 'add') { obj.id = nextIds.act++; day.activities.push(obj); }
-            else { const idx = day.activities.findIndex(x => x.id === args[1]); if (idx >= 0) { obj.id = args[1]; day.activities[idx] = obj; } }
+            else { const i = day.activities.findIndex(x => x.id === args[1]); if (i >= 0) { obj.id = args[1]; day.activities[i] = obj; } }
           }
         } else if (type === 'budget') {
-          const dayId = args[0];
-          let bd = S.budgetDays.find(b => b.dayId === dayId);
+          const dayId = args[0]; let bd = S.budgetDays.find(b => b.dayId === dayId);
           if (!bd) { bd = { dayId, items: [] }; S.budgetDays.push(bd); }
-          const obj = { cat: getVal('fcat'), amount: getNum('fam') };
+          const obj = { cat: gv('fcat'), amount: gn('fam') };
           if (mode === 'add') { obj.id = nextIds.bu++; bd.items.push(obj); }
-          else { const idx = bd.items.findIndex(x => x.id === args[1]); if (idx >= 0) { obj.id = args[1]; bd.items[idx] = obj; } }
+          else { const i = bd.items.findIndex(x => x.id === args[1]); if (i >= 0) { obj.id = args[1]; bd.items[i] = obj; } }
         }
       });
       closeModal();
     }
 
-    // Render functions (simplified - similar to original but adapted)
-    function renderAll() {
-      renderMaster();
-      renderItinerary();
-      renderBudget();
-      renderAdjustment();
-    }
+    document.getElementById('mbg').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+
+    // ─── Render ─────────────────────────────────────────────────────────────
+
+    function renderAll() { renderMaster(); renderItinerary(); renderBudget(); renderAdjustment(); }
 
     function renderMaster() {
       const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
       const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
 
-      let html = `<div class="ib">💡 Drag ☰ untuk reorder baris. Semua perubahan otomatis tersimpan ke Google Sheets.</div>`;
+      let html = `<div class="ib">💡 Drag ☰ untuk reorder. Semua perubahan otomatis tersimpan ke Sheets. Waktu/tanggal dalam <b>WIB (UTC+7)</b>.</div>`;
 
-      // Trains table
-      html += `<div class="sg"><div class="sbar bg-nv">🚆 Tiket Kereta <button class="btn b-add" onclick="openModal('train','add')">+ Tambah</button></div><div class="table-wrapper"><table><thead><tr>
-      <th class="th-tl" style="width:30px"></th><th class="th-tl">#</th><th class="th-tl">Nama KA</th><th class="th-tl">Rute</th>
-      <th class="th-tl">Berangkat</th><th class="th-tl">Tiba</th><th class="th-tl">Harga/Org</th>
-      <th class="th-tl">Pax</th><th class="th-tl">Subtotal</th><th class="th-tl">Status</th><th class="th-tl">Aksi</th>
-    </tr></thead><tbody>`;
+      // Trains
+      html += `<div style="margin-bottom:16px"><div class="sbar bg-nv">🚆 Tiket Kereta <button class="btn b-add" onclick="openModal('train','add')">+ Tambah</button></div>
+      <div class="table-wrapper"><table><thead><tr>
+        <th class="th-tl" style="width:32px"></th><th class="th-tl">#</th>
+        <th class="th-tl">Nama KA</th><th class="th-tl">Rute</th>
+        <th class="th-tl">Berangkat (WIB)</th><th class="th-tl">Tiba (WIB)</th>
+        <th class="th-tl">Durasi</th><th class="th-tl">Harga/Org</th>
+        <th class="th-tl">Pax</th><th class="th-tl">Subtotal</th>
+        <th class="th-tl">Status</th><th class="th-tl">Aksi</th>
+      </tr></thead><tbody>`;
       S.trains.forEach((t, i) => {
-        html += `<tr draggable="true" data-type="train" data-id="${t.id}" ondragstart="onDragStart(event,'train','${t.id}')" ondragover="onDragOver(event)" ondrop="onDrop(event,'train')">
-        <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
-        <td style="font-weight:700">${t.name}</td><td>${t.route}</td>
-        <td style="white-space:nowrap">${fmtD(t.depDate)} ${t.depTime}</td>
-        <td style="white-space:nowrap">${fmtD(t.arrDate)} ${t.arrTime}</td>
-        <td class="mn iab">${rp(t.price)}</td>
-        <td style="text-align:center;font-weight:700">${t.pax}</td>
-        <td class="mn">${rp(t.price * t.pax)}</td>
-        <td><span class="${t.status === 'konfirmasi' ? 'bok' : 'best'}">${t.status}</span></td>
-        <td><span class="ce" onclick="openModal('train','edit',${t.id})">✏️</span> <span class="cd" onclick="deleteItem('train',${t.id})">🗑</span></td>
-      </tr>`;
+        html += `<tr draggable="true" data-type="train" data-id="${t.id}"
+          ondragstart="onDragStart(event,'train','${t.id}')"
+          ondragover="onDragOver(event)" ondrop="onDrop(event,'train')">
+          <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
+          <td style="font-weight:700;white-space:nowrap">${t.name}</td>
+          <td style="white-space:nowrap">${t.route}</td>
+          <td style="white-space:nowrap;font-weight:700;color:var(--tl)">${fmtD(t.depDate)} ${t.depTime} WIB</td>
+          <td style="white-space:nowrap;font-weight:700;color:var(--tl)">${fmtD(t.arrDate)} ${t.arrTime} WIB</td>
+          <td style="white-space:nowrap">${durStr(t.depDate, t.depTime, t.arrDate, t.arrTime)}</td>
+          <td class="mn iab">${rp(t.price)}</td>
+          <td style="text-align:center;font-weight:700">${t.pax}</td>
+          <td class="mn">${rp(t.price * t.pax)}</td>
+          <td><span class="${t.status === 'konfirmasi' ? 'bok' : 'best'}">${t.status}</span></td>
+          <td style="white-space:nowrap">
+            <span class="ce" onclick="openModal('train','edit',${t.id})">✏️</span>
+            <span class="cd" onclick="deleteItem('train',${t.id})">🗑</span>
+          </td>
+        </tr>`;
       });
-      html += `<tr class="tr-tot"><td colspan="8" style="text-align:right">Total Tiket</td><td class="mn">${rp(tkt)}</td><td colspan="2"></td></tr>`;
-      html += `</tbody></table></div></div>`;
+      html += `<tr class="tr-tot"><td colspan="9" style="text-align:right">Total Tiket</td><td class="mn">${rp(tkt)}</td><td colspan="2"></td></tr>
+      </tbody></table></div></div>`;
 
-      // Hotels table
-      html += `<div class="sg"><div class="sbar bg-nv">🏨 Penginapan <button class="btn b-add" onclick="openModal('hotel','add')">+ Tambah</button></div><div class="table-wrapper"><table><thead><tr>
-      <th class="th-tl" style="width:30px"></th><th class="th-tl">#</th><th class="th-tl">Nama</th><th class="th-tl">Kota</th>
-      <th class="th-tl">Check-in/out</th><th class="th-tl">Malam</th><th class="th-tl">Harga/mlm</th>
-      <th class="th-tl">Subtotal</th><th class="th-tl">Status</th><th class="th-tl">Aksi</th>
-    </tr></thead><tbody>`;
+      // Hotels
+      html += `<div style="margin-bottom:16px"><div class="sbar bg-nv">🏨 Penginapan <button class="btn b-add" onclick="openModal('hotel','add')">+ Tambah</button></div>
+      <div class="table-wrapper"><table><thead><tr>
+        <th class="th-tl" style="width:32px"></th><th class="th-tl">#</th>
+        <th class="th-tl">Nama</th><th class="th-tl">Kota</th>
+        <th class="th-tl">Check-in</th><th class="th-tl">Check-out</th>
+        <th class="th-tl">Malam</th><th class="th-tl">Harga/mlm</th>
+        <th class="th-tl">Subtotal</th><th class="th-tl">Status</th><th class="th-tl">Aksi</th>
+      </tr></thead><tbody>`;
       S.hotels.forEach((h, i) => {
         const n = nights(h.checkIn, h.checkOut);
-        html += `<tr draggable="true" data-type="hotel" data-id="${h.id}" ondragstart="onDragStart(event,'hotel','${h.id}')" ondragover="onDragOver(event)" ondrop="onDrop(event,'hotel')">
-        <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
-        <td style="font-weight:700">${h.name}</td><td>${h.city}</td>
-        <td style="white-space:nowrap">${fmtD(h.checkIn)} → ${fmtD(h.checkOut)}</td>
-        <td style="text-align:center">${n}</td>
-        <td class="mn iab">${rp(h.pricePerNight)}</td>
-        <td class="mn">${rp(h.pricePerNight * n)}</td>
-        <td><span class="${h.status === 'konfirmasi' ? 'bok' : 'best'}">${h.status}</span></td>
-        <td><span class="ce" onclick="openModal('hotel','edit',${h.id})">✏️</span> <span class="cd" onclick="deleteItem('hotel',${h.id})">🗑</span></td>
-      </tr>`;
+        html += `<tr draggable="true" data-type="hotel" data-id="${h.id}"
+          ondragstart="onDragStart(event,'hotel','${h.id}')"
+          ondragover="onDragOver(event)" ondrop="onDrop(event,'hotel')">
+          <td><span class="drag-handle">☰</span></td><td>${i + 1}</td>
+          <td style="font-weight:700">${h.name}</td><td>${h.city}</td>
+          <td style="white-space:nowrap;font-weight:700;color:var(--tl)">${fmtD(h.checkIn)}</td>
+          <td style="white-space:nowrap;font-weight:700;color:var(--tl)">${fmtD(h.checkOut)}</td>
+          <td style="text-align:center">${n} mlm</td>
+          <td class="mn iab">${rp(h.pricePerNight)}</td>
+          <td class="mn">${rp(h.pricePerNight * n)}</td>
+          <td><span class="${h.status === 'konfirmasi' ? 'bok' : 'best'}">${h.status}</span></td>
+          <td style="white-space:nowrap">
+            <span class="ce" onclick="openModal('hotel','edit',${h.id})">✏️</span>
+            <span class="cd" onclick="deleteItem('hotel',${h.id})">🗑</span>
+          </td>
+        </tr>`;
       });
-      html += `<tr class="tr-tot"><td colspan="7" style="text-align:right">Total Penginapan</td><td class="mn">${rp(thn)}</td><td colspan="2"></td></tr>
-      <tr class="tr-gnd"><td colspan="7" style="text-align:right">Grand Total Tiket + Penginapan</td><td class="mn">${rp(tkt + thn)}</td><td colspan="2"></td></tr>`;
-      html += `</tbody></table></div></div>`;
+      html += `<tr class="tr-tot"><td colspan="8" style="text-align:right">Total Penginapan</td><td class="mn">${rp(thn)}</td><td colspan="2"></td></tr>
+      <tr class="tr-gnd"><td colspan="8" style="text-align:right">Grand Total</td><td class="mn">${rp(tkt + thn)}</td><td colspan="2"></td></tr>
+      </tbody></table></div></div>`;
+
+      // Params motor
+      const p = S.params;
+      html += `<div class="sbar bg-nv">⚙️ Parameter Motor</div>
+      <div class="pr"><label>⏱ Faktor Waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${p.faktor}" onchange="mutate(()=>{S.params.faktor=parseFloat(this.value)})"><span class="ht">1.0=Normal · 1.3=Macet · 0.8=Lancar</span></div>
+      <div class="pr"><label>🏎 Kecepatan (km/j)</label><input type="number" step="1" value="${p.speed}" onchange="mutate(()=>{S.params.speed=parseFloat(this.value)})"><span class="ht">Rata-rata motor di Bandung</span></div>
+      <div class="pr"><label>⛽ Konsumsi (km/ltr)</label><input type="number" step="1" value="${p.consumption}" onchange="mutate(()=>{S.params.consumption=parseFloat(this.value)})"><span class="ht">Efisiensi motor rental</span></div>
+      <div class="pr"><label>💸 Harga BBM/ltr</label><input type="number" step="500" value="${p.fuelPrice}" onchange="mutate(()=>{S.params.fuelPrice=parseFloat(this.value)})"><span class="ht">Harga BBM saat ini (Rp)</span></div>`;
 
       document.getElementById('p-master').innerHTML = html;
     }
 
     function renderItinerary() {
       let html = `<div style="margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <div style="font-size:13px;font-weight:700;color:var(--nv2)">📅 Hari-hari di Bandung</div>
-      <button class="btn b-add" onclick="addDay()">+ Tambah Hari</button>
-    </div>`;
+        <span style="font-size:13px;font-weight:700;color:var(--nv2)">📅 Hari-hari di Bandung (WIB)</span>
+        <button class="btn b-add" onclick="addDay()">+ Tambah Hari</button>
+      </div>`;
 
       S.days.forEach((day, idx) => {
-        html += `<div class="sg">
-        <div class="day-hdr">
-          <span class="drag-handle" style="color:rgba(255,255,255,.6)">☰</span>
-          <span class="d-title">📍 Hari ${idx + 1}</span>
-          <input type="text" value="${day.label}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).label=this.value})">
-          <span style="font-size:10px">Mulai:</span>
-          <input type="time" value="${day.startTime}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).startTime=this.value})">
-          <button class="btn b-add" onclick="openModal('activity','add',${day.id})">+ Aktivitas</button>
-          <button class="del-day" onclick="delDay(${day.id})">🗑 Hapus</button>
-        </div>
-        <div class="table-wrapper"><table><thead><tr>
-          <th class="th-or" style="width:30px"></th><th class="th-or">Waktu</th><th class="th-or">Aktivitas</th>
-          <th class="th-or">Lokasi</th><th class="th-or">Perj. (mnt)</th><th class="th-or">Durasi (mnt)</th><th class="th-or">Aksi</th>
-        </tr></thead><tbody>`;
+        html += `<div style="margin-bottom:16px">
+          <div class="day-hdr">
+            <span class="drag-handle" style="color:rgba(255,255,255,.6)">☰</span>
+            <span class="d-title">📍 Hari ${idx + 1}</span>
+            <input type="text" value="${day.label}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).label=this.value})">
+            <span style="font-size:10px">Mulai (WIB):</span>
+            <input type="time" value="${day.startTime}" onchange="mutate(()=>{S.days.find(d=>d.id===${day.id}).startTime=this.value})">
+            <button class="btn b-add" onclick="openModal('activity','add',${day.id})">+ Aktivitas</button>
+            <button class="del-day" onclick="delDay(${day.id})">🗑 Hapus</button>
+          </div>
+          <div class="table-wrapper"><table><thead><tr>
+            <th class="th-or" style="width:32px"></th>
+            <th class="th-or">Waktu (WIB)</th>
+            <th class="th-or">Aktivitas</th><th class="th-or">Lokasi</th>
+            <th class="th-or">Perj. (mnt)</th><th class="th-or">Durasi (mnt)</th>
+            <th class="th-or">Aktual (mnt)</th><th class="th-or">Aksi</th>
+          </tr></thead><tbody>`;
         let cur = t2m(day.startTime);
         day.activities.forEach(a => {
-          html += `<tr draggable="true" data-aid="${a.id}" data-dayid="${day.id}" ondragstart="onDragStart(event,'act','${a.id}',${day.id})" ondragover="onDragOver(event)" ondrop="onDrop(event,'act',${day.id})">
-          <td><span class="drag-handle">☰</span></td>
-          <td style="font-weight:700;color:var(--tl);white-space:nowrap">${m2t(cur)}</td>
-          <td>${a.act}</td><td>${a.loc}</td>
-          <td style="text-align:center;background:var(--ab);font-weight:700">${a.base}</td>
-          <td style="text-align:center;background:var(--ab);font-weight:700">${a.dur}</td>
-          <td><span class="ce" onclick="openModal('activity','edit',${day.id},${a.id})">✏️</span> <span class="cd" onclick="deleteItem('act',${day.id},${a.id})">🗑</span></td>
-        </tr>`;
-          cur += a.dur + aMin(a.base);
+          const act = aMin(a.base);
+          html += `<tr draggable="true" data-aid="${a.id}" data-dayid="${day.id}"
+            ondragstart="onDragStart(event,'act','${a.id}',${day.id})"
+            ondragover="onDragOver(event)" ondrop="onDrop(event,'act',${day.id})">
+            <td><span class="drag-handle">☰</span></td>
+            <td style="font-weight:700;color:var(--tl);white-space:nowrap">${m2t(cur)} WIB</td>
+            <td>${a.act}</td><td>${a.loc}</td>
+            <td style="text-align:center;background:var(--ab);font-weight:700;color:var(--ib)">${a.base}</td>
+            <td style="text-align:center;background:var(--ab);font-weight:700;color:var(--ib)">${a.dur}</td>
+            <td style="text-align:center">${act}</td>
+            <td style="white-space:nowrap">
+              <span class="ce" onclick="openModal('activity','edit',${day.id},${a.id})">✏️</span>
+              <span class="cd" onclick="deleteItem('act',${day.id},${a.id})">🗑</span>
+            </td>
+          </tr>`;
+          cur += a.dur + act;
         });
         html += `</tbody></table></div></div>`;
       });
@@ -1114,8 +1353,10 @@
       const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
       let grand = tkt + thn;
 
-      let html = `<div class="sg"><div class="sbar bg-pu2">🚆 Transportasi & Penginapan Antar Kota</div>
-      <div class="table-wrapper"><table><thead><tr><th class="th-pu">#</th><th class="th-pu">Kategori</th><th class="th-pu" style="text-align:right">Total</th></tr></thead><tbody>`;
+      let html = `<div style="margin-bottom:16px"><div class="sbar bg-pu2">🚆 Transportasi & Penginapan Antar Kota</div>
+      <div class="table-wrapper"><table><thead><tr>
+        <th class="th-pu">#</th><th class="th-pu">Kategori</th><th class="th-pu" style="text-align:right">Total</th>
+      </tr></thead><tbody>`;
       [...S.trains.map(t => ['🚆 ' + t.name, t.price * t.pax]), ...S.hotels.map(h => ['🏨 ' + h.name, h.pricePerNight * nights(h.checkIn, h.checkOut)])].forEach((r, i) => {
         html += `<tr><td>${i + 1}</td><td>${r[0]}</td><td class="mn" style="color:var(--gn)">${rp(r[1])}</td></tr>`;
       });
@@ -1128,46 +1369,80 @@
         const dt = bd.items.reduce((a, x) => a + x.amount, 0) + b;
         grand += dt;
 
-        html += `<div class="sg"><div class="sbar bg-or">📅 Budget ${day.label} <button class="btn b-add" onclick="openModal('budget','add',${day.id})">+ Item</button></div>
-        <div class="table-wrapper"><table><thead><tr><th class="th-gn">#</th><th class="th-gn">Kategori</th><th class="th-gn" style="text-align:right">Budget</th><th class="th-gn">Aksi</th></tr></thead><tbody>
-        <tr><td>0</td><td>⛽ BBM Motor</td><td class="mn">${rp(b)}</td><td>-</td></tr>`;
+        html += `<div style="margin-bottom:16px"><div class="sbar bg-or">📅 Budget ${day.label} <button class="btn b-add" onclick="openModal('budget','add',${day.id})">+ Item</button></div>
+        <div class="table-wrapper"><table><thead><tr>
+          <th class="th-gn">#</th><th class="th-gn">Kategori</th>
+          <th class="th-gn" style="text-align:right">Budget</th><th class="th-gn">Aksi</th>
+        </tr></thead><tbody>
+        <tr><td>0</td><td>⛽ BBM Motor (otomatis)</td><td class="mn">${rp(b)}</td><td>-</td></tr>`;
         bd.items.forEach((it, i) => {
-          html += `<tr><td>${i + 1}</td><td>${it.cat}</td><td class="mn iab">${rp(it.amount)}</td>
-          <td><span class="ce" onclick="openModal('budget','edit',${day.id},${it.id})">✏️</span> <span class="cd" onclick="deleteItem('budget',${day.id},${it.id})">🗑</span></td></tr>`;
+          html += `<tr><td>${i + 1}</td><td>${it.cat}</td>
+          <td class="mn iab">${rp(it.amount)}</td>
+          <td style="white-space:nowrap">
+            <span class="ce" onclick="openModal('budget','edit',${day.id},${it.id})">✏️</span>
+            <span class="cd" onclick="deleteItem('budget',${day.id},${it.id})">🗑</span>
+          </td></tr>`;
         });
-        html += `<tr class="tr-tot"><td colspan="2">Total ${day.label}</td><td class="mn">${rp(dt)}</td><td></td></tr></tbody></table></div></div>`;
+        html += `<tr class="tr-tot"><td colspan="2">Total ${day.label}</td><td class="mn">${rp(dt)}</td><td></td></tr>
+        </tbody></table></div></div>`;
       });
 
       const sisa = S.budgetAwal - grand;
-      html += `<div class="sg"><div class="sbar bg-nv">📊 Summary Budget</div>
-      <div class="ac"><div class="acard"><div class="al">🎯 Budget Awal</div><input type="number" step="50000" value="${S.budgetAwal}" style="width:100%;text-align:center;font-size:14px;font-weight:700;border:1.5px solid var(--bd);border-radius:8px;padding:6px" onchange="mutate(()=>{S.budgetAwal=parseFloat(this.value)})"></div>
-      <div class="acard"><div class="al">🔥 Total Estimasi</div><div class="av" style="color:var(--or)">${rp(grand)}</div></div>
-      <div class="acard" style="border-color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}"><div class="al">${sisa >= 0 ? '✅' : '⚠️'} Sisa Dana</div><div class="av" style="color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(sisa)}</div></div></div></div>`;
+      html += `<div><div class="sbar bg-nv">📊 Summary Budget</div>
+      <div class="ac">
+        <div class="acard"><div class="al">🎯 Budget Awal</div>
+          <input type="number" step="50000" value="${S.budgetAwal}" style="width:100%;text-align:center;font-size:14px;font-weight:700;border:1.5px solid var(--bd);border-radius:8px;padding:6px;background:var(--ab);color:var(--ib)"
+          onchange="mutate(()=>{S.budgetAwal=parseFloat(this.value)})">
+        </div>
+        <div class="acard"><div class="al">🔥 Total Estimasi</div><div class="av" style="color:var(--or)">${rp(grand)}</div></div>
+        <div class="acard" style="border-color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">
+          <div class="al">${sisa >= 0 ? '✅' : '⚠️'} Sisa Dana</div>
+          <div class="av" style="color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(sisa)}</div>
+        </div>
+      </div></div>`;
 
       document.getElementById('p-budget').innerHTML = html;
     }
 
     function renderAdjustment() {
-      let html = `<div class="sg"><div class="sbar bg-tl">⚙️ Parameter Perjalanan</div>
-      <div class="pr"><label>⏱ Faktor Waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${S.params.faktor}" onchange="mutate(()=>{S.params.faktor=parseFloat(this.value)})"><span class="ht">1.0=Normal · 1.3=Macet</span></div>
+      const tkt = S.trains.reduce((a, t) => a + t.price * t.pax, 0);
+      const thn = S.hotels.reduce((a, h) => a + h.pricePerNight * nights(h.checkIn, h.checkOut), 0);
+      let grand = tkt + thn;
+      S.days.forEach(day => {
+        const bd = S.budgetDays.find(x => x.dayId === day.id);
+        grand += (bd ? bd.items.reduce((a, x) => a + x.amount, 0) : 0) + bbm(day);
+      });
+      const sisa = S.budgetAwal - grand;
+
+      let html = `<div class="sbar bg-tl">⚙️ Parameter Perjalanan</div>
+      <div class="pr"><label>⏱ Faktor Waktu</label><input type="number" step="0.1" min="0.5" max="3" value="${S.params.faktor}" onchange="mutate(()=>{S.params.faktor=parseFloat(this.value)})"><span class="ht">1.0=Normal · 1.3=Macet · 0.8=Lancar</span></div>
       <div class="pr"><label>🏎 Kecepatan (km/j)</label><input type="number" step="1" value="${S.params.speed}" onchange="mutate(()=>{S.params.speed=parseFloat(this.value)})"><span class="ht">Rata-rata kecepatan motor</span></div>
       <div class="pr"><label>⛽ Konsumsi (km/ltr)</label><input type="number" step="1" value="${S.params.consumption}" onchange="mutate(()=>{S.params.consumption=parseFloat(this.value)})"><span class="ht">Efisiensi motor</span></div>
-      <div class="pr"><label>💸 Harga BBM/ltr</label><input type="number" step="500" value="${S.params.fuelPrice}" onchange="mutate(()=>{S.params.fuelPrice=parseFloat(this.value)})"><span class="ht">Harga BBM saat ini</span></div>
-      ${S.days.map(d => `<div class="pr"><label>⏰ Jam Mulai — ${d.label}</label><input type="time" value="${d.startTime}" onchange="mutate(()=>{S.days.find(x=>x.id===${d.id}).startTime=this.value})"><span class="ht">Ubah jam mulai hari ini</span></div>`).join('')}
-    </div>
-    <button class="btn b-reset" style="margin-top:12px" onclick="if(confirm('Reset semua ke default?')) loadDefaultData()">🔄 Reset ke Default</button>`;
+      <div class="pr"><label>💸 Harga BBM/ltr</label><input type="number" step="500" value="${S.params.fuelPrice}" onchange="mutate(()=>{S.params.fuelPrice=parseFloat(this.value)})"><span class="ht">Harga BBM saat ini (Rp)</span></div>
+      ${S.days.map(d => `<div class="pr"><label>⏰ Jam Mulai — ${d.label}</label><input type="time" value="${d.startTime}" onchange="mutate(()=>{S.days.find(x=>x.id===${d.id}).startTime=this.value})"><span class="ht">Jam mulai hari ini (WIB)</span></div>`).join('')}
+
+      <div style="margin-top:16px;padding:14px;background:${sisa >= 0 ? '#DCFCE7' : '#FEE2E2'};border-radius:10px;text-align:center">
+        <div style="font-size:12px;color:${sisa >= 0 ? '#166534' : '#991B1B'};margin-bottom:6px">${sisa >= 0 ? '✅ Budget aman' : '⚠️ Budget kurang'}</div>
+        <div style="font-size:20px;font-weight:700;color:${sisa >= 0 ? 'var(--gn)' : 'var(--rd)'}">${rp(Math.abs(sisa))}</div>
+        <div style="font-size:11px;color:#64748B;margin-top:4px">${sisa >= 0 ? 'sisa dana' : 'kekurangan'}</div>
+      </div>
+
+      <button class="btn b-reset" style="margin-top:14px" onclick="if(confirm('Reset semua ke default?')) loadDefaultData()">🔄 Reset ke Default</button>`;
+
       document.getElementById('p-adj').innerHTML = html;
     }
 
-    function switchTab(tabName) {
+    // ─── Tab switching ───────────────────────────────────────────────────────
+
+    function switchTab(name) {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
       document.querySelectorAll('.pnl').forEach(p => p.classList.remove('on'));
-      const idx = { master: 0, itin: 1, budget: 2, adj: 3 }[tabName];
+      const idx = { master: 0, itin: 1, budget: 2, adj: 3 }[name];
       document.querySelectorAll('.tab')[idx].classList.add('on');
-      document.getElementById(`p-${tabName}`).classList.add('on');
+      document.getElementById(`p-${name}`).classList.add('on');
     }
 
-    // Make functions global
+    // Expose globals
     window.switchTab = switchTab;
     window.openModal = openModal;
     window.closeModal = closeModal;
@@ -1181,7 +1456,7 @@
     window.mutate = mutate;
     window.loadDefaultData = loadDefaultData;
 
-    // Initialize
+    // Boot
     loadFromSheets();
   </script>
 </body>
